@@ -13,7 +13,7 @@ phases:
   pre_build:
     commands:
       - NEXTFLOW_IMAGE_URI=${NEXTFLOW_IMAGE_NAME}:${NEXTFLOW_VERSION}
-      - $(aws ecr get-login --no-include-email --region ${AWS_REGION})
+      - aws ecr get-login --no-include-email --region ${AWS_REGION}
   build:
     commands:
       - docker build -t ${NEXTFLOW_IMAGE_URI} --build-arg NEXTFLOW_VERSION=${NEXTFLOW_VERSION} .
