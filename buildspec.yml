@@ -13,13 +13,13 @@ phases:
   pre_build:
     commands:
       - NEXTFLOW_IMAGE_URI=${NEXTFLOW_IMAGE_NAME}:${NEXTFLOW_VERSION}
+      - $(aws ecr get-login --no-include-email --region ${AWS_REGION})
   build:
     commands:
       - docker build -t ${NEXTFLOW_IMAGE_URI} --build-arg NEXTFLOW_VERSION=${NEXTFLOW_VERSION} .
   post_build:
     commands:
       - docker save -o nextflow_image.tar ${NEXTFLOW_IMAGE_URI}
-      - $(aws ecr get-login --no-include-email --region ${AWS_REGION})
       - docker tag ${NEXTFLOW_IMAGE_URI}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NEXTFLOW_IMAGE_URI}:latest
       - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NEXTFLOW_IMAGE_URI}:latest      
 
