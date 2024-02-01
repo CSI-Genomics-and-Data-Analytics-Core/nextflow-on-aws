@@ -1,0 +1,14 @@
+/.idea/
+/output/
+*.vscode
+codebuild_build.sh
+.DS_Store
+venv
+.venv
+*.iml
+coverage.out
+vendor
+/docs/
+/dist/
+*.zip
+site/.hugo_build.lock

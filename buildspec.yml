@@ -6,6 +6,8 @@ env:
     # These variables may be over-ridden as appropriate by the CI/CD pipeline
     NEXTFLOW_IMAGE_NAME: "nextflow"
     NEXTFLOW_VERSION: "23.10.1"
+    AWS_REGION: "23.10.1"
+    AWS_ACCOUNT_ID: 026171442599
 
 phases:
   pre_build:
@@ -13,10 +15,13 @@ phases:
       - NEXTFLOW_IMAGE_URI=${NEXTFLOW_IMAGE_NAME}:${NEXTFLOW_VERSION}
   build:
     commands:
-      - docker build -t ${NEXTFLOW_IMAGE_URI} --build-arg NEXTFLOW_VERSION=${NEXTFLOW_VERSION} .
+      - docker build -t ${NEXTFLOW_IMAGE_URI} --build-arg NEXTFLOW_VERSION=${NEXTFLOW_VERSION} ./packages/engines/nextflow
   post_build:
     commands:
       - docker save -o nextflow_image.tar ${NEXTFLOW_IMAGE_URI}
+      - $(aws ecr get-login --no-include-email --region ${AWS_REGION})
+      - docker tag ${NEXTFLOW_IMAGE_URI}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NEXTFLOW_IMAGE_URI}:latest
+      - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NEXTFLOW_IMAGE_URI}:latest      
 
 artifacts:
   files:
