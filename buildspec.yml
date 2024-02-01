@@ -6,7 +6,7 @@ env:
     # These variables may be over-ridden as appropriate by the CI/CD pipeline
     NEXTFLOW_IMAGE_NAME: "nextflow"
     NEXTFLOW_VERSION: "23.10.1"
-    AWS_REGION: "23.10.1"
+    AWS_REGION: "ap-southeast-1"
     AWS_ACCOUNT_ID: 026171442599
 
 phases:
