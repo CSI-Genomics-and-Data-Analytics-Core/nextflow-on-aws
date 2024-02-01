@@ -21,7 +21,7 @@ phases:
   post_build:
     commands:
       - docker save -o nextflow_image.tar ${NEXTFLOW_IMAGE_URI}
-      - docker tag ${NEXTFLOW_IMAGE_URI}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NEXTFLOW_IMAGE_URI}:latest
+      - docker tag ${NEXTFLOW_IMAGE_URI}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NEXTFLOW_IMAGE_URI}
       - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NEXTFLOW_IMAGE_URI}     
 
 artifacts:
