@@ -23,7 +23,7 @@ test_command = ['echo "This is a test!"']
 job_queue = "TestJobQueue"
 job_definition = "TestJobDefinition"
 job_id = "xyz"
-job_name = "agc-run-workflow"
+job_name = "gedac-run-workflow"
 log_stream = "log-stream"
 engine_log_group = "EngineLogGroup"
 
@@ -170,7 +170,7 @@ def test_get_run_log_not_started(aws_batch: BatchClient, adapter: StubBatchAdapt
     assert run_log == RunLog(
         run_id=job_id,
         state=State.QUEUED,
-        run_log=Log(name="agc-run-workflow|xyz", cmd=test_command, stdout=log_stream),
+        run_log=Log(name="gedac-run-workflow|xyz", cmd=test_command, stdout=log_stream),
         task_logs=[],
         outputs={"id": job_id},
     )
@@ -193,7 +193,7 @@ def test_get_run_log_in_progress(aws_batch: BatchClient, adapter: StubBatchAdapt
             run_id=job_id,
             state=State.RUNNING,
             run_log=Log(
-                name="agc-run-workflow|xyz",
+                name="gedac-run-workflow|xyz",
                 cmd=test_command,
                 stdout=log_stream,
                 start_time="1970-01-01T00:00:01+00:00",
@@ -228,7 +228,7 @@ def test_get_run_log_completed(aws_batch: BatchClient, adapter: StubBatchAdapter
             run_id=job_id,
             state=State.RUNNING,
             run_log=Log(
-                name="agc-run-workflow|xyz",
+                name="gedac-run-workflow|xyz",
                 cmd=test_command,
                 stdout=log_stream,
                 start_time="1970-01-01T00:00:01+00:00",

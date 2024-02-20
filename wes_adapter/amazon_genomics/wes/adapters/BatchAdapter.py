@@ -164,7 +164,7 @@ class BatchAdapter(AbstractWESAdapter):
         )
 
         submit_job_response = self.aws_batch.submit_job(
-            jobName="agc-run-workflow",
+            jobName="gedac-run-workflow",
             jobQueue=self.job_queue,
             jobDefinition=self.job_definition,
             containerOverrides={

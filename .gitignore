@@ -11,4 +11,5 @@ vendor
 /docs/
 /dist/
 *.zip
+!backup/wes_adapter.zip
 site/.hugo_build.lock

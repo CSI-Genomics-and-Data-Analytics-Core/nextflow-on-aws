@@ -1,7 +1,7 @@
-# Amazon Genomics Workflow Execution Service (WES) Adapter
+# Workflow Execution Service (WES) Adapter
 
 A basic GA4GH compliant Workflow Execution Service that enables use of adaptors for integrating with workflow execution engines.
-The code in this package is capturing the Lambda Function source code that's deployed as WES adapter endpoint for purposes of AGC
+The code in this package is capturing the Lambda Function source code that's deployed as WES adapter endpoint
 
 
 # Open source usage
