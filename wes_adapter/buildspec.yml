@@ -26,4 +26,4 @@ phases:
 
 artifacts:
   files:
-    - wes_adapter.zip
+    - wes_adapter/wes_adapter.zip
