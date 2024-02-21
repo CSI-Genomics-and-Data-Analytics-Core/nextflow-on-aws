@@ -11,6 +11,9 @@ phases:
   pre_build:
     commands:
       - echo Starting build of wes_adapter...
+      # install python3.9 on amazon linux 2
+      - sudo amazon-linux-extras install python3.9
+      - sudo yum install python3-pip -y
   build:
     commands:
       - chmod +x wes_adapeter/install.sh
