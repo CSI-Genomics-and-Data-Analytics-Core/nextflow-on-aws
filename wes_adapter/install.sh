@@ -1,7 +1,7 @@
 #! /bin/bash
 
-if ! hash python3.9; then
-    echo "python3.9 is not installed"
+if ! hash python; then
+    echo "python is not installed"
     exit 1
 fi
 
