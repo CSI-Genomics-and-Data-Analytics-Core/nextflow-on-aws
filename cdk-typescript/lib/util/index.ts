@@ -4,7 +4,6 @@ import { StringParameter } from "aws-cdk-lib/aws-ssm";
 import { Maybe, ServiceContainer } from "../types";
 import { Arn, CfnParameter, Fn, Stack } from "aws-cdk-lib";
 import { Construct, Node } from "constructs";
-import { APP_NAME } from "../constants";
 import { SecureService } from "../constructs";
 import { Protocol } from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import { IVpc, Subnet, SubnetSelection } from "aws-cdk-lib/aws-ec2";
@@ -54,7 +53,7 @@ export const createEcrImage = (scope: Construct, designation: string): Container
   const engineName = designation.toUpperCase();
   const accountId = '026171442599';
   const region = "ap-southeast-1";
-  const tag = "latest";
+  const tag = "23.10.1";
   const repositoryName = "nextflow";
   const ecrArn = `arn:aws:ecr:${region}:${accountId}:repository/${repositoryName}`;
   const repository = Repository.fromRepositoryAttributes(scope, repositoryName, {

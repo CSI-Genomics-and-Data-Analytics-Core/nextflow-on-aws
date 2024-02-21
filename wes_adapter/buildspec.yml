@@ -1,0 +1,25 @@
+version: 0.2
+
+env:
+  shell: bash
+  variables:
+    # These variables may be over-ridden as appropriate by the CI/CD pipeline
+    AWS_REGION: "ap-southeast-1"
+    AWS_ACCOUNT_ID: 026171442599
+
+phases:
+  pre_build:
+    commands:
+      - echo Starting build of wes_adapter...
+  build:
+    commands:
+      # run install.sh
+      - chmod +x install.sh
+      - ./install.sh
+  post_build:
+    commands:
+      - echo Done building wes_adapter.
+
+artifacts:
+  files:
+    - wes_adapter.zip
