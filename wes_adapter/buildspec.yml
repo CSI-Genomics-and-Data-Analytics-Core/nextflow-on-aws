@@ -19,7 +19,7 @@ phases:
     commands:
       - cd wes_adapter
       - chmod +x install.sh
-      - .install.sh
+      - ./install.sh
   post_build:
     commands:
       - echo Done building wes_adapter.
