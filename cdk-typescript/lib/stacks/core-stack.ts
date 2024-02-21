@@ -136,7 +136,7 @@ export class CoreStack extends Stack {
 
     const asset = new Asset(this, "WesAdapter", {
       // path: path.join(homedir(), ".agc", "wes", "wes_adapter.zip"),
-      path: path.join(__dirname, "../../../wes_adapter/wes_adapter.zip"),
+      path: path.join(__dirname, "assets/wes_adapter.zip"),
     });
 
     new CfnOutput(this, WES_BUCKET_NAME, { value: asset.s3BucketName, exportName: WES_BUCKET_NAME });
