@@ -13,9 +13,8 @@ phases:
       - echo Starting build of wes_adapter...
   build:
     commands:
-      # run install.sh
-      - chmod +x install.sh
-      - ./install.sh
+      - chmod +x wes_adapeter/install.sh
+      - ./wes_adapeter/install.sh
   post_build:
     commands:
       - echo Done building wes_adapter.
