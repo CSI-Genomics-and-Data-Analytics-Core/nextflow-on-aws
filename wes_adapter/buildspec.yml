@@ -17,8 +17,9 @@ phases:
       - python --version
   build:
     commands:
-      - chmod +x wes_adapter/install.sh
-      - ./wes_adapter/install.sh
+      - cd wes_adapter
+      - chmod +x install.sh
+      - .install.sh
   post_build:
     commands:
       - echo Done building wes_adapter.
