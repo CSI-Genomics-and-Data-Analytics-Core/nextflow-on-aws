@@ -8,12 +8,13 @@ env:
     AWS_ACCOUNT_ID: 026171442599
 
 phases:
+  install:
+    runtime-versions:
+      python: 3.9
   pre_build:
     commands:
       - echo Starting build of wes_adapter...
-      # install python3.9 on amazon linux 2
-      - sudo amazon-linux-extras install python3.9
-      - sudo yum install python3-pip -y
+      - python --version
   build:
     commands:
       - chmod +x wes_adapeter/install.sh
