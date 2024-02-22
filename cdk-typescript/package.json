@@ -18,6 +18,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "jest": "^26.4.2",
+    "minimatch": ">=3.0.5",
     "prettier": "2.3.1",
     "ts-jest": "^26.2.0",
     "ts-node": "^10.2.0",
@@ -28,6 +29,13 @@
     "@aws-cdk/aws-lambda-python-alpha": "2.50.0-alpha.0",
     "aws-cdk-lib": "2.50.0",
     "constructs": "^10.1.86",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "@aws-cdk/aws-iam": "^1.180.0",
+    "@aws-cdk/cloud-assembly-schema": "^1.180.0",
+    "@aws-cdk/core": "^1.180.0",
+    "@aws-cdk/cx-api": "^1.180.0",
+    "minimatch": ">=3.0.5",
+    "source-map-support": "^0.5.20",
+    "vm2": ">=3.9.11"
   }
 }
