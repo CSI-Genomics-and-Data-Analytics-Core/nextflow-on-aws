@@ -22,7 +22,7 @@ const account: string = process.env.CDK_DEFAULT_ACCOUNT!;
 const region: string = 'ap-southeast-1';
 const contextParameters = new ContextAppParameters(app.node);
 
-new ContextStack(app, `${PRODUCT_NAME}-Context-${contextParameters.projectName}-${contextParameters.userId}-${contextParameters.contextName}`, {
+new ContextStack(app, `${PRODUCT_NAME}-Compute`, {
   contextParameters,
   env: {
     account,

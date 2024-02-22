@@ -8,7 +8,6 @@ venv
 *.iml
 coverage.out
 vendor
-/docs/
 /dist/
 *.zip
 !cdk_typescript/assets/wes_adapter.zip

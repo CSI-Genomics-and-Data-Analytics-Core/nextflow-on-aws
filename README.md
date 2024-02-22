@@ -12,4 +12,14 @@ The `nextflow-engine` directory used for Nextflow Engine dockerrization, contain
 
 ## wes_adapter
 
-The `wes_adapter` directory contains 
+The `wes_adapter` directory contains python code for wes_adapter Lambda.
+
+## docs
+
+The `docs` directory contains documentation and diagrams.
+
+
+
+This diagram illustrates the flow of the CDK code and how it works together with other components in the project.
+
+![CDK](docs/cdk-flow.png)
