@@ -1,7 +1,7 @@
 import { TaggedResourceTypes } from "./types/tagged-resource-types";
 
 export const PRODUCT_NAME = "nextflow-engine";
-export const APP_NAME = "nextflow";
+export const APP_NAME = "gedac";
 export const APP_ENV_NAME = "gedac";
 export const INFRASTRUCTURE_VERSION = "1.0.0";
 export const APP_TAG_KEY = "application-name";

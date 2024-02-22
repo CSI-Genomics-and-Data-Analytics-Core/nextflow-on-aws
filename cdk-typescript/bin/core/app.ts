@@ -17,7 +17,7 @@ const bucketName = getContextOrDefault(app.node, `${APP_ENV_NAME}_BUCKET_NAME`, 
 const createNewBucket = getContextOrDefault(app.node, `CREATE_${APP_ENV_NAME}_BUCKET`, "false").toLowerCase() == "true";
 const usePublicSubnets = getContextOrDefault(app.node, `${APP_ENV_NAME}_USE_PUBLIC_SUBNETS`, "false").toLowerCase() == "true";
 const subnetIds = getContextOrDefault<Maybe<string>>(app.node, `${APP_ENV_NAME}_VPC_SUBNETS`)?.split(",");
-const imageId = getContextOrDefault(app.node, `${APP_ENV_NAME}_AMI`);
+const imageId = getContextOrDefault(app.node, `${APP_ENV_NAME}_AMI`, "ami-000e3c1953aef9f7d");
 
 const stackParameters = [
   {

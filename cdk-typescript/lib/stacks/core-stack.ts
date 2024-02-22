@@ -16,7 +16,6 @@ import {
 } from "../constants";
 import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import * as path from "path";
-import { homedir } from "os";
 import { Asset } from "aws-cdk-lib/aws-s3-assets";
 import { EcsOptimizedImage } from "aws-cdk-lib/aws-ecs";
 
@@ -135,8 +134,7 @@ export class CoreStack extends Stack {
     new CfnOutput(this, VPC_PARAMETER_ID, { value: this.vpc.vpcId });
 
     const asset = new Asset(this, "WesAdapter", {
-      // path: path.join(homedir(), ".agc", "wes", "wes_adapter.zip"),
-      path: path.join(__dirname, "assets/wes_adapter.zip"),
+      path: path.join(__dirname, "../../assets/wes_adapter.zip"),
     });
 
     new CfnOutput(this, WES_BUCKET_NAME, { value: asset.s3BucketName, exportName: WES_BUCKET_NAME });
