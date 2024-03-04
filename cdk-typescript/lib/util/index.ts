@@ -51,7 +51,7 @@ export const getCommonParameterList = (scope: Construct, keySuffix: string, leng
 
 export const createEcrImage = (scope: Construct, designation: string): ContainerImage => {
   const engineName = designation.toUpperCase();
-  const accountId = '026171442599';
+  const accountId = '862363609447';
   const region = "ap-southeast-1";
   const tag = "23.10.1";
   const repositoryName = "nextflow";

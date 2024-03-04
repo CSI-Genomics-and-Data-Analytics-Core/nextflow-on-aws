@@ -121,8 +121,8 @@ export class ContextAppParameters {
     this.userId = 'gedac';
     this.userEmail = 'admin@gedac.org';
 
-    this.outputBucketName = 'gedac-bucket';
-    this.artifactBucketName = 'gedac-026171442599-ap-southeast-1';
+    this.outputBucketName = 'gedac-bucket-profile';
+    this.artifactBucketName = 'gedac-862363609447-ap-southeast-1';
      //create sring[] 
     this.readBucketArns = ['arn:aws:s3:::ngi-igenomes', 'arn:aws:s3:::1000genomes']
 
