@@ -124,9 +124,9 @@ export class ContextAppParameters {
     this.outputBucketName = 'gedac-bucket-profile';
     this.artifactBucketName = 'gedac-862363609447-ap-southeast-1';
      //create sring[] 
-    this.readBucketArns = ['arn:aws:s3:::ngi-igenomes', 'arn:aws:s3:::1000genomes']
+    this.readBucketArns = ['arn:aws:s3:::ngi-igenomes', 'arn:aws:s3:::1000genomes'];
 
-    this.readWriteBucketArns = ['arn:aws:s3:::gedac-bucket']
+    this.readWriteBucketArns = ['arn:aws:s3:::gedac-bucket-profile', 'arn:aws:s3:::gedac-862363609447-ap-southeast-1'];
 
     this.kmsDecryptPolicy = getEnvStringOrDefault(node, "KMS_DECRYPT_POLICY", undefined);
 
@@ -147,7 +147,7 @@ export class ContextAppParameters {
     this.usePublicSubnets = getEnvBoolOrDefault(node, "PUBLIC_SUBNETS", true);
     this.infrastructureVersion = "1.0.0";
 
-    const tagsJson = getEnvStringOrDefault(node, "CUSTOM_TAGS", '{"ENV":"PROD","USER":"GEDAC"}' );
+    const tagsJson = getEnvStringOrDefault(node, "CUSTOM_TAGS", '{"ENV":"COST","USER":"GEDAC", "SAMPLE_COUNT":"12"}' );
     if (tagsJson != null) {
       this.customTags = JSON.parse(tagsJson);
     } else {
