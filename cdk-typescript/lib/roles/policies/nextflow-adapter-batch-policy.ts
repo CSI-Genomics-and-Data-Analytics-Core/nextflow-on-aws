@@ -11,7 +11,7 @@ export class NextflowAdapterBatchPolicy extends PolicyDocument {
       statements: [
         new PolicyStatement({
           effect: Effect.ALLOW,
-          actions: ["batch:SubmitJob", "batch:TerminateJob"],
+          actions: ["batch:SubmitJob", "batch:TerminateJob", "batch:tagResource"],
           resources: props.batchJobPolicyArns,
         }),
       ],
