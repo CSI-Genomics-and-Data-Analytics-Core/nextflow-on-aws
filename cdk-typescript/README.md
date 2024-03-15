@@ -1,14 +1,63 @@
-# Welcome to your CDK TypeScript project
+# Nextflow Infrastructure provisioning via CDK TypeScript
 
-This is a blank project for CDK development with TypeScript.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Project Structure
 
-## Useful commands
+This project follows a specific directory structure to organize its files and resources. Here is an overview of the main directories:
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+### bin
+
+The `bin` directory possess the bootstrap scripts for each infrastructure.
+
+`permission (optional)`
+
+Create permission policies for,
+
+1. Provisioning `core` and `context` infrastructures via CDK script
+2. Authorization to call WES REST API.
+
+
+
+`core`
+
+Setup core networking infrastructure, VPC and three pairs of public and private subnets for each availablity zone.
+
+Along with S3 bucket, DynamoDB and SSM parameters (to use under compute infrastructure)
+
+Configurations available in `cdk-typescript/lib/env/context-app-parameters.ts` (Namespaces,S3 bucket(s), instanceTypes, maxVCPUS, tags, and more) 
+
+
+`context`
+
+Setup Nextflow compute resources, AWS Batch queues, Lambda, AWS Gateway and such.
+
+
+### lib
+
+The `lib` directory contains all the coding scripts in modulrized manner.
+
+### assets
+
+The `assets` directory contains static files needed by CDK script, eg: wes-adapter.zip.
+
+
+
+## Commands
+
+### Intall dependencies
+
+`npm install`
+
+### Deploy via CDK
+
+Choose the bootstrap script on `cdk.json`  ( core or context)
+
+` "app": "npx ts-node --prefer-ts-exts bin/core/app.ts" `
+
+Run,
+
+`npm run cdk deploy`
+
+### Generate Cloudformation YAML
+
+`npm run cdk synth > cloudformation.yml`

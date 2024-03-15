@@ -10,5 +10,5 @@ coverage.out
 vendor
 /dist/
 *.zip
-!cdk_typescript/assets/wes_adapter.zip
+!cdk-typescript/assets/wes_adapter.zip
 site/.hugo_build.lock
