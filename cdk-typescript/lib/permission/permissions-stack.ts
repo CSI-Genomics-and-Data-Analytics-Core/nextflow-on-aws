@@ -1,12 +1,14 @@
-import * as cdk from '@aws-cdk/core';
-import { ManagedPolicy, PolicyDocument } from '@aws-cdk/aws-iam';
+
+import { ManagedPolicy } from 'aws-cdk-lib/aws-iam';
 import * as stmt from './policy-statements';
-export class PermissionsStack extends cdk.Stack {
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+export class PermissionsStack extends Stack {
   adminPolicy: ManagedPolicy;
   userPolicyCDK: ManagedPolicy;
   userPolicy: ManagedPolicy;
 
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props?:StackProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here

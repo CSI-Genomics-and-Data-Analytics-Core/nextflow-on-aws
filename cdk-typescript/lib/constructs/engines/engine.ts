@@ -3,12 +3,13 @@ import { Construct } from "constructs";
 import { IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
 import { AccessPoint, FileSystem, PerformanceMode, ThroughputMode } from "aws-cdk-lib/aws-efs";
 import { RemovalPolicy, Size } from "aws-cdk-lib";
-import { MountPoint, Volume } from "aws-cdk-lib/aws-ecs";
+import { EcrImage, MountPoint, Volume } from "aws-cdk-lib/aws-ecs";
 
 export interface EngineProps {
   readonly vpc: IVpc;
   readonly subnets: SubnetSelection;
   readonly rootDirS3Uri: string;
+  readonly ecrImage: EcrImage
 }
 
 export class Engine extends Construct {

@@ -26,7 +26,7 @@ export class NextflowEngineRole extends Role {
           statements: [
             new PolicyStatement({
               effect: Effect.ALLOW,
-              actions: ["logs:GetQueryResults", "logs:StopQuery"],
+              actions: ["logs:GetQueryResults", "logs:StopQuery", "logs:GetLogEvents"],
               resources: ["*"],
             }),
           ],

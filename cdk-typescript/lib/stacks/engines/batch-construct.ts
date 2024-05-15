@@ -4,9 +4,9 @@ import { Batch } from "../../constructs";
 import { ContextAppParameters } from "../../env";
 import { BucketOperations } from "../../common/BucketOperations";
 import { IRole } from "aws-cdk-lib/aws-iam";
-import { ComputeResourceType } from "@aws-cdk/aws-batch-alpha";
 import { Construct } from "constructs";
 import { LaunchTemplateData } from "../../constructs/launch-template-data";
+import { ComputeResourceType } from "../../types";
 
 export interface BatchConstructProps {
   /**

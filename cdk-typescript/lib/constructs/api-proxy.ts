@@ -93,7 +93,7 @@ export class ApiProxy extends Construct {
       JSON.stringify({
         requestId: AccessLogField.contextRequestId(),
         caller: AccessLogField.contextIdentityCaller(),
-        callerAccountId: AccessLogField.contextAccountId(),
+        callerAccountId: AccessLogField.contextOwnerAccountId(),
         user: AccessLogField.contextIdentityUser(),
         requestTime: AccessLogField.contextRequestTime(),
         httpMethod: AccessLogField.contextHttpMethod(),

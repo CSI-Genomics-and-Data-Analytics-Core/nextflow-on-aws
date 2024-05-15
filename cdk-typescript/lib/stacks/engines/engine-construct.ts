@@ -3,11 +3,9 @@ import { ILogGroup } from "aws-cdk-lib/aws-logs";
 import { Construct } from "constructs";
 import { IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
 import { IRole } from "aws-cdk-lib/aws-iam";
-import { PythonFunction } from "@aws-cdk/aws-lambda-python-alpha";
-import { WES_BUCKET_NAME, WES_KEY_PARAMETER_NAME } from "../../constants";
 import { Code, Function, Runtime } from "aws-cdk-lib/aws-lambda";
 import { Bucket } from "aws-cdk-lib/aws-s3";
-import { getCommonParameter } from "../../util";
+import { Asset } from "aws-cdk-lib/aws-s3-assets";
 
 export interface EngineOutputs {
   accessLogGroup: ILogGroup;
@@ -17,8 +15,10 @@ export interface EngineOutputs {
 }
 
 export abstract class EngineConstruct extends Construct {
-  protected constructor(scope: Construct, id: string) {
+  private readonly asset: Asset;
+  protected constructor(scope: Construct, id: string, asset: Asset) {
     super(scope, id);
+    this.asset = asset;
   }
 
   public outputToParent(): void {
@@ -29,20 +29,14 @@ export abstract class EngineConstruct extends Construct {
     new CfnOutput(Stack.of(this), "WesUrl", { value: outputs.wesUrl });
   }
 
-  public renderPythonLambda(
-    scope: Construct,
-    id: string,
-    role: IRole,
-    environment: Record<string, string>,
-    vpc?: IVpc,
-    vpcSubnets?: SubnetSelection
-  ): PythonFunction {
+  // create ptr to the lambda function from aws-cdk-lib 
+  public renderPythonLambda(scope: Construct, id: string, role: IRole, environment: Record<string, string>, vpc?: IVpc, vpcSubnets?: SubnetSelection): Function {
     return new Function(scope, id, {
       vpc,
       vpcSubnets,
-      code: Code.fromBucket(Bucket.fromBucketName(scope, "WesAdapter", Fn.importValue(WES_BUCKET_NAME)), getCommonParameter(this, WES_KEY_PARAMETER_NAME)),
+      code: Code.fromBucket(Bucket.fromBucketName(scope, "WesAdapter", this.asset.s3BucketName), this.asset.s3ObjectKey),
       handler: "index.handler",
-      runtime: Runtime.PYTHON_3_9,
+      runtime: Runtime.PYTHON_3_12,
       environment,
       role,
       timeout: Duration.seconds(60),

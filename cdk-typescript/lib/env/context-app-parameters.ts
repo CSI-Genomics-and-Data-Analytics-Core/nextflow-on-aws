@@ -124,7 +124,7 @@ export class ContextAppParameters {
     this.outputBucketName = 'gedac-bucket-profile';
     this.artifactBucketName = 'gedac-862363609447-ap-southeast-1';
      //create sring[] 
-    this.readBucketArns = ['arn:aws:s3:::ngi-igenomes', 'arn:aws:s3:::1000genomes'];
+    this.readBucketArns = ['arn:aws:s3:::ngi-igenomes'];
 
     this.readWriteBucketArns = ['arn:aws:s3:::gedac-bucket-profile', 'arn:aws:s3:::gedac-862363609447-ap-southeast-1'];
 
@@ -147,7 +147,7 @@ export class ContextAppParameters {
     this.usePublicSubnets = getEnvBoolOrDefault(node, "PUBLIC_SUBNETS", true);
     this.infrastructureVersion = "1.0.0";
 
-    const tagsJson = getEnvStringOrDefault(node, "CUSTOM_TAGS", '{"ENV":"COST","USER":"GEDAC", "SAMPLE_COUNT":"12"}' );
+    const tagsJson = getEnvStringOrDefault(node, "CUSTOM_TAGS", '{"ENV":"COST","USER":"GEDAC", "SAMPLE_COUNT":"15", "DATE": "31 MARCH 2024"}' );
     if (tagsJson != null) {
       this.customTags = JSON.parse(tagsJson);
     } else {

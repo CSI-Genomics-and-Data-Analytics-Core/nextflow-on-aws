@@ -11,3 +11,7 @@ serverless-wsgi
 setuptools
 swagger-ui-bundle
 werkzeug
+botocore==1.30.0
+urllib3===1.26.5
+pytest==7.1.2
+jsonschema==4.17.3

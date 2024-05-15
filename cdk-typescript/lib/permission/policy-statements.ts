@@ -1,5 +1,6 @@
-import { PolicyStatement, Effect } from '@aws-cdk/aws-iam';
-import { Arn, ArnComponents, Stack } from '@aws-cdk/core';
+import { Arn, ArnComponents, Stack } from "aws-cdk-lib";
+import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
+
 
 function action(svc: string, action: string) : string {
     return [svc, action].join(":")

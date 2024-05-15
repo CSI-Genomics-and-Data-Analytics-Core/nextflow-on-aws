@@ -1,5 +1,5 @@
 import { Repository } from "aws-cdk-lib/aws-ecr";
-import { ContainerImage, TaskDefinition } from "aws-cdk-lib/aws-ecs";
+import { ContainerImage, EcrImage, TaskDefinition } from "aws-cdk-lib/aws-ecs";
 import { StringParameter } from "aws-cdk-lib/aws-ssm";
 import { Maybe, ServiceContainer } from "../types";
 import { Arn, CfnParameter, Fn, Stack } from "aws-cdk-lib";
@@ -7,7 +7,6 @@ import { Construct, Node } from "constructs";
 import { SecureService } from "../constructs";
 import { Protocol } from "aws-cdk-lib/aws-elasticloadbalancingv2";
 import { IVpc, Subnet, SubnetSelection } from "aws-cdk-lib/aws-ec2";
-import { LogConfiguration, LogDriver as BatchLogDriver } from "@aws-cdk/aws-batch-alpha";
 import { ILogGroup } from "aws-cdk-lib/aws-logs";
 
 export const getContext = (node: Node, key: string): string => {
@@ -49,8 +48,7 @@ export const getCommonParameterList = (scope: Construct, keySuffix: string, leng
   return subnetIds;
 };
 
-export const createEcrImage = (scope: Construct, designation: string): ContainerImage => {
-  const engineName = designation.toUpperCase();
+export const createEcrImage = (scope: Construct): EcrImage => {
   const accountId = '862363609447';
   const region = "ap-southeast-1";
   const tag = "23.10.1";
@@ -85,9 +83,12 @@ export const renderServiceWithTaskDefinition = (
   });
 };
 
-export function renderBatchLogConfiguration(scope: Construct, logGroup: ILogGroup): LogConfiguration {
+
+
+// create batch log configuration
+export function renderBatchLogConfiguration(scope: Construct, logGroup: ILogGroup): any {
   return {
-    logDriver: BatchLogDriver.AWSLOGS,
+    logDriver: "awslogs",
     options: {
       "awslogs-group": logGroup.logGroupName,
     },

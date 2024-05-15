@@ -2,14 +2,29 @@
 import { App } from "aws-cdk-lib";
 import "source-map-support/register";
 import { getContextOrDefault } from "../../lib/util";
-import { CoreStack } from "../../lib/stacks";
+import { MainStack } from "../../lib/stacks";
 import { Maybe } from "../../lib/types";
-import { APP_TAG_KEY, APP_NAME, PRODUCT_NAME, APP_ENV_NAME, INFRASTRUCTURE_VERSION_KEY } from "../../lib/constants";
+import {
+  INFRASTRUCTURE_VERSION_KEY,
+  APP_NAME,
+  APP_ENV_NAME,
+  APP_TAG_KEY,
+  CONTEXT_TAG_KEY,
+  PRODUCT_NAME,
+  PROJECT_TAG_KEY,
+  USER_EMAIL_TAG_KEY,
+  USER_ID_TAG_KEY,
+  ENGINE_TAG_KEY,
+  ENGINE_TYPE_TAG_KEY,
+} from "../../lib/constants";
+import { ContextAppParameters } from "../../lib/env";
 
+console.log("Starting CDK deployment");
 const app = new App();
 
 const account: string = process.env.CDK_DEFAULT_ACCOUNT!;
-const region: string = 'ap-southeast-1';
+const region: string = process.env.CDK_DEFAULT_REGION ?? "ap-southeast-1";
+const contextParameters = new ContextAppParameters(app.node);
 
 const infrastructureVersion = "1.0.0";
 const vpcId = getContextOrDefault<Maybe<string>>(app.node, "VPC_ID");
@@ -44,7 +59,7 @@ if (customTagsJsonString) {
   customTagsMap = JSON.parse(customTagsJsonString);
 }
 
-new CoreStack(app, `${PRODUCT_NAME}-Core`, {
+new MainStack(app, `${PRODUCT_NAME}-Core`, {
   vpcId,
   bucketName,
   createNewBucket,
@@ -59,8 +74,15 @@ new CoreStack(app, `${PRODUCT_NAME}-Core`, {
     ...customTagsMap,
     [APP_TAG_KEY]: APP_NAME,
     [INFRASTRUCTURE_VERSION_KEY]: infrastructureVersion,
+    [PROJECT_TAG_KEY]: contextParameters.projectName,
+    [CONTEXT_TAG_KEY]: contextParameters.contextName,
+    [USER_ID_TAG_KEY]: contextParameters.userId,
+    [USER_EMAIL_TAG_KEY]: contextParameters.userEmail,
+    [ENGINE_TAG_KEY]: contextParameters.engineName,
+    [ENGINE_TYPE_TAG_KEY]: contextParameters.engineType,
   },
   parameters: stackParameters,
   subnetIds: subnetIds,
   imageId: imageId,
+  contextParameters: contextParameters,
 });

@@ -1,12 +1,13 @@
 import { Fn, Names, Stack } from "aws-cdk-lib";
-import { ComputeEnvironment, ComputeResourceType, IComputeEnvironment, IJobQueue, JobQueue } from "@aws-cdk/aws-batch-alpha";
-import { CfnLaunchTemplate, IMachineImage, InstanceType, IVpc, SubnetSelection } from "aws-cdk-lib/aws-ec2";
+import { CfnComputeEnvironment, CfnJobQueue, FargateComputeEnvironment, IComputeEnvironment, ManagedEc2EcsComputeEnvironment, EcsMachineImage } from "aws-cdk-lib/aws-batch";
+import { CfnLaunchTemplate, InstanceType, IVpc, Vpc, SubnetSelection, LaunchTemplate, IMachineImage, MachineImage } from "aws-cdk-lib/aws-ec2";
 import {
   CfnInstanceProfile,
   Grant,
   IGrantable,
   IManagedPolicy,
   IRole,
+  InstanceProfile,
   ManagedPolicy,
   PolicyDocument,
   PolicyStatement,
@@ -18,7 +19,7 @@ import { batchArn, ec2Arn } from "../util";
 import { APP_NAME, APP_TAG_KEY, TAGGED_RESOURCE_TYPES } from "../constants";
 import { CfnLaunchTemplateProps } from "aws-cdk-lib/aws-ec2/lib/ec2.generated";
 import { Construct } from "constructs";
-
+import { ComputeResourceType } from "../types"
 export interface ComputeOptions {
   /**
    * The VPC to run the batch in.
@@ -77,7 +78,7 @@ export interface ComputeOptions {
    * The machine image to use for compute
    * @default managed by Batch
    */
-  computeEnvImage?: IMachineImage;
+  computeEnvImage?: MachineImage;
 }
 
 export interface BatchProps extends ComputeOptions {
@@ -105,7 +106,7 @@ export class Batch extends Construct {
   // This is the role that the backing instances use, not the role that batch jobs run as.
   public readonly role: IRole;
   public readonly computeEnvironment: IComputeEnvironment;
-  public readonly jobQueue: IJobQueue;
+  public readonly jobQueue: CfnJobQueue;
 
   constructor(scope: Construct, id: string, props: BatchProps) {
     super(scope, id);
@@ -113,27 +114,32 @@ export class Batch extends Construct {
     this.role = this.renderRole(props.computeType, props.awsPolicyNames);
     this.computeEnvironment = this.renderComputeEnvironment(props);
 
-    this.jobQueue = new JobQueue(this, "JobQueue", {
-      computeEnvironments: [
+    this.jobQueue = new CfnJobQueue(this, "JobQueue", {
+      computeEnvironmentOrder: [
         {
           order: 1,
-          computeEnvironment: this.computeEnvironment,
+          computeEnvironment: this.computeEnvironment.computeEnvironmentArn,
         },
       ],
+      priority: 1,
+      state: "ENABLED",
     });
+
+    // convert above queue to IJobQueue class
+
   }
 
   public grantJobAdministration(grantee: IGrantable, jobDefinitionName = "*"): Grant {
     return Grant.addToPrincipal({
       grantee: grantee,
       actions: ["batch:SubmitJob"],
-      resourceArns: [this.jobQueue.jobQueueArn, batchArn(this, "job-definition", jobDefinitionName)],
+      resourceArns: [this.jobQueue.ref, batchArn(this, "job-definition", jobDefinitionName)],
     });
   }
 
   private renderRole(computeType?: ComputeResourceType, awsPolicyNames?: string[]): IRole {
     const awsPolicies = awsPolicyNames?.map((policyName) => ManagedPolicy.fromAwsManagedPolicyName(policyName));
-    if (computeType == ComputeResourceType.FARGATE || computeType == ComputeResourceType.FARGATE_SPOT) {
+    if (computeType == ComputeResourceType.FARGATE) {
       return this.renderEcsRole(awsPolicies);
     }
     return this.renderEc2Role(awsPolicies);
@@ -189,15 +195,13 @@ export class Batch extends Construct {
 
   private renderComputeEnvironment(options: ComputeOptions): IComputeEnvironment {
     const computeType = options.computeType || defaultComputeType;
-    if (computeType == ComputeResourceType.FARGATE || computeType == ComputeResourceType.FARGATE_SPOT) {
-      return new ComputeEnvironment(this, "ComputeEnvironment", {
-        computeResources: {
-          vpc: options.vpc,
-          type: computeType,
-          maxvCpus: options.maxVCpus,
-          vpcSubnets: options.subnets,
-        },
+    if (computeType == "FARGATE" || computeType == "FARGATE_SPOT") {
+      return new FargateComputeEnvironment(this, "ComputeEnvironment", {
+        vpc: options.vpc,
+        vpcSubnets: options.subnets,
+        maxvCpus: options.maxVCpus ?? 256,
       });
+
     }
 
     const launchTemplateProps = this.renderLaunchTemplateProps(options.launchTemplateData, options.resourceTags);
@@ -206,25 +210,24 @@ export class Batch extends Construct {
      * TAKE NOTE! If you change the launch template you will need to destroy any existing contexts and deploy. A CDK update won't
      * be enough to trigger an update of the Batch compute environment to use the new template.
      */
-    const launchTemplate = launchTemplateProps ? new CfnLaunchTemplate(this, "LaunchTemplate", launchTemplateProps) : undefined;
+    const launchTemplate = launchTemplateProps ? new LaunchTemplate(this, "LaunchTemplate", launchTemplateProps) : undefined;
 
-    const instanceProfile = new CfnInstanceProfile(this, "ComputeProfile", {
-      roles: [this.role.roleName],
+    const instanceProfile = new InstanceProfile(this, "ComputeProfile", {
+      role: this.role,
     });
-    return new ComputeEnvironment(this, "ComputeEnvironment", {
-      computeResources: {
-        vpc: options.vpc,
-        type: computeType,
-        maxvCpus: options.maxVCpus,
-        image: options.computeEnvImage,
-        instanceRole: instanceProfile.attrArn,
-        instanceTypes: getInstanceTypesForBatch(options.instanceTypes, computeType, Stack.of(this).region),
-        launchTemplate: launchTemplate && {
-          launchTemplateName: launchTemplate.launchTemplateName!,
-        },
-        computeResourcesTags: options.resourceTags,
-        vpcSubnets: options.subnets,
-      },
+
+    console.log("image", options.computeEnvImage);
+
+
+
+    return new ManagedEc2EcsComputeEnvironment(this, "ComputeEnvironment", {
+      launchTemplate: launchTemplate,
+      vpc: options.vpc,
+      instanceRole: instanceProfile.role,
+      images: options.computeEnvImage ? [options.computeEnvImage] : undefined,
+      vpcSubnets: options.subnets,
+      maxvCpus: options.maxVCpus ?? 256,
+      instanceTypes: getInstanceTypesForBatch(options.instanceTypes, computeType) ?? [],
     });
   }
 
