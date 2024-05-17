@@ -1,6 +1,6 @@
 import { Fn, Names, Stack } from "aws-cdk-lib";
-import { CfnComputeEnvironment, CfnJobQueue, FargateComputeEnvironment, IComputeEnvironment, ManagedEc2EcsComputeEnvironment, EcsMachineImage } from "aws-cdk-lib/aws-batch";
-import { CfnLaunchTemplate, InstanceType, IVpc, Vpc, SubnetSelection, LaunchTemplate, IMachineImage, MachineImage } from "aws-cdk-lib/aws-ec2";
+import { CfnComputeEnvironment, CfnJobQueue, FargateComputeEnvironment, IComputeEnvironment, ManagedEc2EcsComputeEnvironment, EcsMachineImage, AllocationStrategy, EcsMachineImageType } from "aws-cdk-lib/aws-batch";
+import { CfnLaunchTemplate, InstanceType, IVpc, Vpc, SubnetSelection, LaunchTemplate, IMachineImage, MachineImage, UserData } from "aws-cdk-lib/aws-ec2";
 import {
   CfnInstanceProfile,
   Grant,
@@ -17,7 +17,6 @@ import {
 import { getInstanceTypesForBatch } from "../util/instance-types";
 import { batchArn, ec2Arn } from "../util";
 import { APP_NAME, APP_TAG_KEY, TAGGED_RESOURCE_TYPES } from "../constants";
-import { CfnLaunchTemplateProps } from "aws-cdk-lib/aws-ec2/lib/ec2.generated";
 import { Construct } from "constructs";
 import { ComputeResourceType } from "../types"
 export interface ComputeOptions {
@@ -210,28 +209,63 @@ export class Batch extends Construct {
      * TAKE NOTE! If you change the launch template you will need to destroy any existing contexts and deploy. A CDK update won't
      * be enough to trigger an update of the Batch compute environment to use the new template.
      */
-    const launchTemplate = launchTemplateProps ? new LaunchTemplate(this, "LaunchTemplate", launchTemplateProps) : undefined;
+    // const cfnLaunchTemplate = launchTemplateProps ? new CfnLaunchTemplate(this, "cfnLaunchTemplate", launchTemplateProps) : undefined;
+
+    let userdata = UserData.custom( options.launchTemplateData || "");
+    
+  
+
+    // new launchTemplate
+    const launchTemplate = new LaunchTemplate(this, "LaunchTemplate", {
+      userData: userdata,
+    });
+    
 
     const instanceProfile = new InstanceProfile(this, "ComputeProfile", {
       role: this.role,
     });
 
-    console.log("image", options.computeEnvImage);
-
-
+    // // create MachineImage with ami-id
+    // const machineImage = MachineImage.genericLinux({
+    //   "ap-southeast-1": "ami-000e3c1953aef9f7d",
+    //   "us-east-1": "ami-0c76be34ffbfb0b14",
+    //   "us-east-2": "ami-076214eda80ae72ef",
+    //   "us-west-1": "ami-0d54a8e02fa6fbeec",
+    //   "us-west-2": "ami-0c6ee50d15e7364d4",
+    // }) as EcsMachineImage;
 
     return new ManagedEc2EcsComputeEnvironment(this, "ComputeEnvironment", {
-      launchTemplate: launchTemplate,
-      vpc: options.vpc,
-      instanceRole: instanceProfile.role,
-      images: options.computeEnvImage ? [options.computeEnvImage] : undefined,
-      vpcSubnets: options.subnets,
-      maxvCpus: options.maxVCpus ?? 256,
-      instanceTypes: getInstanceTypesForBatch(options.instanceTypes, computeType) ?? [],
+        vpc: options.vpc,
+        // images: [machineImage],
+        instanceRole: instanceProfile.role,
+        instanceTypes: getInstanceTypesForBatch(options.instanceTypes, computeType, Stack.of(this).region),
+        launchTemplate: launchTemplate,
+        vpcSubnets: options.subnets,
+        maxvCpus: options.maxVCpus ?? 256,
+        allocationStrategy: computeType == "SPOT" ? AllocationStrategy.SPOT_CAPACITY_OPTIMIZED : AllocationStrategy.BEST_FIT,
+        spot: computeType == "SPOT",
     });
+
+    // create ECS Machine Image from MachineImage
+    // create ManagedEc2EcsComputeEnvironment
+    return new ManagedEc2EcsComputeEnvironment(this, "ComputeEnvironment", {
+        vpc: options.vpc,
+        images: [machineImage],
+        instanceRole: instanceProfile.role,
+        instanceTypes: getInstanceTypesForBatch(options.instanceTypes, computeType, Stack.of(this).region),
+        launchTemplate: launchTemplate,
+        vpcSubnets: options.subnets,
+        maxvCpus: options.maxVCpus ?? 256,
+        allocationStrategy: computeType == "SPOT" ? AllocationStrategy.SPOT_CAPACITY_OPTIMIZED : AllocationStrategy.BEST_FIT,
+        spot: computeType == "SPOT",
+    });
+
+
+
+
   }
 
-  private renderLaunchTemplateProps(launchTemplateData?: string, resourceTags?: { [p: string]: string }): CfnLaunchTemplateProps | undefined {
+  private renderLaunchTemplateProps(launchTemplateData?: string, resourceTags?: { [p: string]: string }) {
     if (launchTemplateData) {
       let tagSpecifications;
 

@@ -175,13 +175,9 @@ export class MainStack extends Stack {
     this.addParameter({ name: VPC_NUMBER_SUBNETS_PARAMETER_NAME, value: `${subnets.length}` });
     this.subnets = subnetSelectionFromIds(this, subnets.map((s) => s.subnetId));
 
-    // print props
-    console.log(props);
     this.computeEnvImage = props.imageId
       ? MachineImage.genericLinux({ [this.region]: props.imageId })
       : EcsOptimizedImage.amazonLinux2();
-
-    console.log(this.computeEnvImage);
 
     const { engineName } = props.contextParameters;
     const { filesystemType } = props.contextParameters;
