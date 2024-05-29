@@ -29,7 +29,7 @@ const contextParameters = new ContextAppParameters(app.node);
 const infrastructureVersion = "1.0.0";
 const vpcId = getContextOrDefault<Maybe<string>>(app.node, "VPC_ID");
 const bucketName = getContextOrDefault(app.node, `${APP_ENV_NAME}_BUCKET_NAME`, `${APP_NAME}-${account}-${region}`);
-const createNewBucket = getContextOrDefault(app.node, `CREATE_${APP_ENV_NAME}_BUCKET`, "true").toLowerCase() == "true";
+const createNewBucket = getContextOrDefault(app.node, `CREATE_${APP_ENV_NAME}_BUCKET`, "false").toLowerCase() == "true";
 const usePublicSubnets = getContextOrDefault(app.node, `${APP_ENV_NAME}_USE_PUBLIC_SUBNETS`, "false").toLowerCase() == "true";
 const subnetIds = getContextOrDefault<Maybe<string>>(app.node, `${APP_ENV_NAME}_VPC_SUBNETS`)?.split(",");
 const imageId = getContextOrDefault(app.node, `${APP_ENV_NAME}_AMI`, "ami-000e3c1953aef9f7d");

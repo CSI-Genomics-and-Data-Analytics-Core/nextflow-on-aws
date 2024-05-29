@@ -95,6 +95,7 @@ export class NextflowEngineConstruct extends EngineConstruct {
       adapterLogGroup: this.adapterLogGroup,
       engineLogGroup: this.nextflowEngine.logGroup,
       wesUrl: this.apiProxy.restApi.url,
+      apiKey: this.apiProxy.apiKey.keyId,
     };
   }
 

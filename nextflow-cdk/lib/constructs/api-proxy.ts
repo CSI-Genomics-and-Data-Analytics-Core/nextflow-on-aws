@@ -2,6 +2,7 @@ import { Construct } from "constructs";
 import {
   AccessLogField,
   AccessLogFormat,
+  ApiKey,
   ApiKeySourceType,
   AuthorizationType,
   ConnectionType,
@@ -11,13 +12,19 @@ import {
   LambdaIntegration,
   LogGroupLogDestination,
   MethodLoggingLevel,
+  Period,
   RestApi,
+  UsagePlan,
+  CfnUsagePlanKey,
+  UsagePlanPerApiStage,
   VpcLink,
+  Cors,
 } from "aws-cdk-lib/aws-apigateway";
 import { INetworkLoadBalancer } from "aws-cdk-lib/aws-elasticloadbalancingv2";
-import { AccountPrincipal, PolicyDocument, PolicyStatement } from "aws-cdk-lib/aws-iam";
+import { AccountPrincipal, AnyPrincipal, PolicyDocument, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { ILogGroup, LogGroup } from "aws-cdk-lib/aws-logs";
 import { IFunction } from "aws-cdk-lib/aws-lambda";
+import { CfnOutput } from "aws-cdk-lib";
 
 export interface ApiProxyProps {
   /**
@@ -47,6 +54,7 @@ export interface ApiProxyProps {
 export class ApiProxy extends Construct {
   public readonly accessLogGroup: ILogGroup;
   public readonly restApi: RestApi;
+  public readonly apiKey: ApiKey;
 
   constructor(scope: Construct, props: ApiProxyProps) {
     super(scope, "ApiProxy");
@@ -67,25 +75,57 @@ export class ApiProxy extends Construct {
         accessLogFormat: this.renderAccessLogFormat(),
         accessLogDestination: new LogGroupLogDestination(this.accessLogGroup),
       },
-      policy: new PolicyDocument({
-        statements: [
-          new PolicyStatement({
-            actions: ["execute-api:Invoke"],
-            resources: ["execute-api:/*/*"],
-            principals: props.allowedAccountIds.map((accountId) => new AccountPrincipal(accountId)),
-          }),
-        ],
-      }),
+      // policy: new PolicyDocument({
+      //   statements: [
+      //     new PolicyStatement({
+      //       actions: ["execute-api:Invoke"],
+      //       resources: ["execute-api:/*/*"],
+      //       // allow all accounts
+      //       principals: [new AnyPrincipal()],
+      //     }),
+      //   ],
+      // }),
     });
 
     const apiTarget = props.lambda ? new LambdaIntegration(props.lambda) : this.renderHttpTarget(props.loadBalancer!);
+    
     this.restApi.root.addProxy({
       defaultIntegration: apiTarget,
+      defaultCorsPreflightOptions: {
+        allowOrigins: Cors.ALL_ORIGINS,
+        allowMethods: Cors.ALL_METHODS,
+      },
       defaultMethodOptions: {
-        authorizationType: AuthorizationType.IAM,
-        requestParameters: { "method.request.path.proxy": true },
+        authorizationType: AuthorizationType.NONE,
+        apiKeyRequired: true,
       },
     });
+
+    // Add API key
+    this.apiKey = new ApiKey(this, 'ApiKey', {
+      description: 'API key for nextflow lambda invocation',
+    });
+
+    // Create a usage plan
+    const usagePlan = new UsagePlan(this, 'UsagePlan', {
+      name: 'Basic',
+      description: 'Basic usage plan',
+      apiStages: [{
+        api: this.restApi,
+        stage: this.restApi.deploymentStage,
+      }],
+      throttle: {
+        rateLimit: 10, // requests per second
+        burstLimit: 100, // maximum concurrent requests
+      },
+      quota: {
+        limit: 1000, // requests per month
+        period: Period.MONTH,
+      },
+    });
+
+    // Associate the API key with the usage plan
+    usagePlan.addApiKey(this.apiKey);
   }
 
   private renderAccessLogFormat(): AccessLogFormat {

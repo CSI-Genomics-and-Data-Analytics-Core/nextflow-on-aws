@@ -12,6 +12,7 @@ export interface EngineOutputs {
   adapterLogGroup?: ILogGroup;
   engineLogGroup: ILogGroup;
   wesUrl: string;
+  apiKey: string;
 }
 
 export abstract class EngineConstruct extends Construct {
@@ -27,6 +28,7 @@ export abstract class EngineConstruct extends Construct {
     new CfnOutput(Stack.of(this), "AdapterLogGroupName", { value: outputs.adapterLogGroup ? outputs.adapterLogGroup.logGroupName : "" });
     new CfnOutput(Stack.of(this), "EngineLogGroupName", { value: outputs.engineLogGroup.logGroupName });
     new CfnOutput(Stack.of(this), "WesUrl", { value: outputs.wesUrl });
+    new CfnOutput(Stack.of(this), "ApiKey", { value: outputs.apiKey });
   }
 
   // create ptr to the lambda function from aws-cdk-lib 
