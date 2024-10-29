@@ -25,16 +25,12 @@ class DefaultWorkflowEngineParameter(Model):
         :param default_value: The default_value of this DefaultWorkflowEngineParameter.  # noqa: E501
         :type default_value: str
         """
-        self.openapi_types = {
-            'name': str,
-            'type': str,
-            'default_value': str
-        }
+        self.openapi_types = {"name": str, "type": str, "default_value": str}
 
         self.attribute_map = {
-            'name': 'name',
-            'type': 'type',
-            'default_value': 'default_value'
+            "name": "name",
+            "type": "type",
+            "default_value": "default_value",
         }
 
         self._name = name
@@ -42,7 +38,7 @@ class DefaultWorkflowEngineParameter(Model):
         self._default_value = default_value
 
     @classmethod
-    def from_dict(cls, dikt) -> 'DefaultWorkflowEngineParameter':
+    def from_dict(cls, dikt) -> "DefaultWorkflowEngineParameter":
         """Returns the dict as a model
 
         :param dikt: A dict.

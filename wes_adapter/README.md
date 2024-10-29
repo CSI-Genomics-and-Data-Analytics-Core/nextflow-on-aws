@@ -21,8 +21,8 @@ Override the required environment variables at `./start-local-server.sh` to poin
 
 ```bash
 export ENGINE_NAME= # nextflow, snakemake, miniwdl or cromwell
-export JOB_QUEUE= 
-export JOB_DEFINITION= 
+export JOB_QUEUE=
+export JOB_DEFINITION=
 export ENGINE_LOG_GROUP=
 ```
 
@@ -32,7 +32,7 @@ Execute `./start-local-server.sh` and navigate your browser to http://localhost:
 
 # Make release
 
-To run `make release`, you need to have python3.9 installed. 
+To run `make release`, you need to have python3.9 installed.
 There are several ways to install python3.9, the easiest way is to download installer from
 https://www.python.org/downloads/.
 

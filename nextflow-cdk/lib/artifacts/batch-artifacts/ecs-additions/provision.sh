@@ -21,7 +21,7 @@ echo ARTIFACTS_NAMESPACE = "$ARTIFACTS_NAMESPACE"
 printenv
 
 function ecs() {
-    
+
     if [[ $OS =~ "amzn1" ]]; then
         # Amazon Linux 1 uses upstart for init
         case $1 in

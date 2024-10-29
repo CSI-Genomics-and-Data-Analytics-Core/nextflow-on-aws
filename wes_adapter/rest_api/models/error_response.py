@@ -23,21 +23,15 @@ class ErrorResponse(Model):
         :param status_code: The status_code of this ErrorResponse.  # noqa: E501
         :type status_code: int
         """
-        self.openapi_types = {
-            'msg': str,
-            'status_code': int
-        }
+        self.openapi_types = {"msg": str, "status_code": int}
 
-        self.attribute_map = {
-            'msg': 'msg',
-            'status_code': 'status_code'
-        }
+        self.attribute_map = {"msg": "msg", "status_code": "status_code"}
 
         self._msg = msg
         self._status_code = status_code
 
     @classmethod
-    def from_dict(cls, dikt) -> 'ErrorResponse':
+    def from_dict(cls, dikt) -> "ErrorResponse":
         """Returns the dict as a model
 
         :param dikt: A dict.

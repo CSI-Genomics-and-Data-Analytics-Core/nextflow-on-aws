@@ -80,7 +80,7 @@ export class GedacPermissions {
         const svc = "s3";
         return [
             new PolicyStatement({
-                
+
                 effect: Effect.ALLOW,
                 actions: actions(svc,
                     "CreateBucket",
@@ -91,11 +91,11 @@ export class GedacPermissions {
             })
         ]
     }
-    
+
     s3Destroy() : PolicyStatement[] {
         const svc = "s3";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
                 "DeleteBucket",
@@ -108,11 +108,11 @@ export class GedacPermissions {
             ],
           })]
     }
-    
+
     s3Read() : PolicyStatement[] {
         const svc = "s3";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
                 "GetEncryptionConfiguration",
@@ -127,11 +127,11 @@ export class GedacPermissions {
             ],
           })]
     }
-    
+
     s3Write() : PolicyStatement[] {
         const svc = "s3";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
                 "PutEncryptionConfiguration",
@@ -152,7 +152,7 @@ export class GedacPermissions {
     dynamodbCreate() : PolicyStatement[] {
         const svc = "dynamodb";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
                 "CreateTable",
@@ -164,13 +164,13 @@ export class GedacPermissions {
               this.arn({service: svc, region: "*", resource: "table", resourceName: "Gedac"})
             ],
           })]
-          
+
     }
-    
+
     dynamodbDestroy() : PolicyStatement[] {
         const svc = "dynamodb";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
                 "DeleteTable",
@@ -181,11 +181,11 @@ export class GedacPermissions {
             ],
           })]
     }
-    
+
     dynamodbRead() : PolicyStatement[] {
         const svc = "dynamodb";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
                 "DescribeTable",
@@ -202,11 +202,11 @@ export class GedacPermissions {
             ],
           })]
     }
-    
+
     dynamodbWrite() : PolicyStatement[] {
         const svc = "dynamodb";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
                 "UpdateTimeToLive",
@@ -224,7 +224,7 @@ export class GedacPermissions {
     ssmCreate() : PolicyStatement[] {
         const svc = "ssm";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
                 "LabelParameterVersion",
@@ -236,11 +236,11 @@ export class GedacPermissions {
             ]
           })]
     }
-    
+
     ssmDestroy() : PolicyStatement[] {
         const svc = "ssm";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
               "DeleteParameter",
@@ -252,11 +252,11 @@ export class GedacPermissions {
             ]
           })]
     }
-    
+
     ssmRead() : PolicyStatement[] {
         const svc = "ssm";
         return [new PolicyStatement({
-            
+
             effect: Effect.ALLOW,
             actions: actions(svc,
                 "DescribeParameters",
@@ -274,8 +274,8 @@ export class GedacPermissions {
         const svc = "iam";
         return [
             new PolicyStatement({
-                
-                effect: Effect.ALLOW, 
+
+                effect: Effect.ALLOW,
                 actions: actions(svc,
                     "*Role",
                     // "GetRole",
@@ -312,7 +312,7 @@ export class GedacPermissions {
                 ]
             }),
             new PolicyStatement({
-                
+
                 effect: Effect.ALLOW,
                 actions: actions(svc,
                     "PassRole",
@@ -326,41 +326,41 @@ export class GedacPermissions {
 
     private cloudformationCommon() {
         const svc = "cloudformation";
-    
+
         return new PolicyStatement({
             effect: Effect.ALLOW,
-            actions: actions(svc, 
+            actions: actions(svc,
                 "Describe*",
                 // "DescribeStacks",
                 // "DescribeStackEvents",
-    
+
                 // "DescribeStackResource",
                 // "DescribeStackResourceDrifts",
                 // "DescribeStackResources",
-    
+
                 "List*",
                 // "ListStacks",
                 // "ListChangeSets",
                 // "ListExports",
                 // "ListStackResources",
-                
+
                 "Detect*",
                 // "DetectStackDrift",
                 // "DetectStackResourceDrift",
-                
+
                 "*Stack",
                 //"CreateStack",
                 //"DeleteStack",
                 //"UpdateStack",
-                
+
                 "GetTemplate",
-    
+
                 "*ChangeSet",
                 // "CreateChangeSet",
                 // "DescribeChangeSet",
                 // "ExecuteChangeSet",
                 // "DeleteChangeSet",
-                
+
                 "TagResource",
                 "UntagResource",
             ),
@@ -369,14 +369,14 @@ export class GedacPermissions {
             ]
         })
     }
-    
+
     cloudformationAdmin() : PolicyStatement[] {
         let stmt = this.cloudformationCommon();
-    
+
         stmt.addResources(
             this.arn({service: "cloudformation", region: "*", resource: "stack", resourceName: "Gedac-*"}) // allow on all Gedac related stacks
         );
-    
+
         return [
             stmt,
             new PolicyStatement({
@@ -390,14 +390,14 @@ export class GedacPermissions {
             })
         ]
     }
-    
+
     cloudformationUser() : PolicyStatement[] {
         let stmt = this.cloudformationCommon();
-    
+
         stmt.addResources(
             this.arn({service: "cloudformation", region: "*", resource: "stack", resourceName: "Gedac-*-*"}) // allow only on non Gedac-Core stacks
         );
-        
+
         return [
             stmt,
             new PolicyStatement({
@@ -416,7 +416,7 @@ export class GedacPermissions {
         const svc = "batch";
         return [
             new PolicyStatement({
-                
+
                 effect: Effect.ALLOW,
                 actions: actions(svc,
                     "*ComputeEnvironment",
@@ -436,7 +436,7 @@ export class GedacPermissions {
                 ]
             }),
             new PolicyStatement({
-                
+
                 effect: Effect.ALLOW,
                 actions: actions(svc,
                     "*Job",
@@ -452,11 +452,11 @@ export class GedacPermissions {
                 ]
             }),
             new PolicyStatement({
-                
+
                 effect: Effect.ALLOW,
                 actions: actions(svc,
                     "Describe*",
-                    // "DescribeComputeEnvironments", //* 
+                    // "DescribeComputeEnvironments", //*
                     // "DescribeJobDefinitions", //*
                     // "DescribeJobQueues", //*
                     // "DescribeJobs", //*
@@ -473,7 +473,7 @@ export class GedacPermissions {
             }),
         ]
     }
-    
+
     ecs() : PolicyStatement[] {
         const svc = "ecs"
         return [
@@ -489,28 +489,28 @@ export class GedacPermissions {
                     //"CreateService",
                     //"DeleteService",
                     //"UpdateService",
-                
+
                     "Describe*",
                     //"DescribeClusters",
                     //"DescribeServices",
                     //"DescribeTaskDefinition",
                     //"DescribeTasks",
-        
+
                     "List*",
                     //"ListClusters",
                     //"ListServices",
                     //"ListTaskDefinitions",
                     //"ListTasks",
-                    
+
                     "*Task",
                     //"RunTask",
                     //"StartTask",
                     //"StopTask",
-                    
+
                     "ListTagsForResource",
                     "TagResource",
                     "UntagResource",
-        
+
                 ),
                 resources: [
                     this.arn({service: svc, region: "*", resource: "*", resourceName: "Gedac*"}),
@@ -532,7 +532,7 @@ export class GedacPermissions {
             })
         ]
     }
-    
+
     // elb
     elb() : PolicyStatement[] {
         const svc = "elasticloadbalancing";
@@ -540,19 +540,19 @@ export class GedacPermissions {
             new PolicyStatement({
                 effect: Effect.ALLOW,
                 actions: actions(svc,
-                    
+
                     "Create*",
                     //"CreateListener",
                     //"CreateLoadBalancer",
                     //"CreateTargetGroup",
-                    
+
                     "Delete*",
                     //"DeleteListener",
                     //"DeleteLoadBalancer",
                     //"DeleteTargetGroup",
-                    
+
                     "ModifyLoadBalancerAttributes",
-                    
+
                     "*Tags",
                 ),
                 resources: [
@@ -576,8 +576,8 @@ export class GedacPermissions {
             })
     ]
     }
-    
-    
+
+
     // apigw
     // these permissions replicate the aws managed polices for apigateway
     // AmazonAPIGatewayInvokeFullAccess
@@ -608,8 +608,8 @@ export class GedacPermissions {
             })
         ]
     }
-    
-    
+
+
     // efs
     efs() : PolicyStatement[] {
         const svc = "elasticfilesystem";
@@ -620,33 +620,33 @@ export class GedacPermissions {
                 // "CreateFileSystem",
                 // "DeleteFilesystem",
                 // "UpdateFileSystem",
-                
+
                 "*MountTarget",
                 // "CreateMountTarget",
                 // "DeleteMountTarget",
-                
+
                 "Describe*",
                 //"DescribeFilesystems",
                 //"DescribeMountTargets",
                 //"DescribeTags",
-                
-                
+
+
                 "*Tag*",
                 //"CreateTags",
                 //"DeleteTags",
                 //"ListTagsForResource",
                 //"TagResource",
                 //"UntagResource",
-    
+
             ),
             resources: [
                 this.arn({service: svc, region: "*", resource: "file-system", resourceName: "*"}),
             ]
         })]
     }
-    
-    
-    
+
+
+
     // service-discovery (aka cloudmap)
     cloudmap() : PolicyStatement[]{
         const svc = "servicediscovery";
@@ -657,16 +657,16 @@ export class GedacPermissions {
                     "*Service",
                     //"CreateService",
                     //"DeleteService",
-                    
+
                     "*Namespace",
                     //"CreatePrivateDnsNamespace",
                     //"DeleteNamespace",
-                    
+
                     //"Get*",
                     //"GetService",
                     //"GetNamespace",
                     //"GetOperation",
-        
+
                     "List*",
                     //"ListNamespaces",
                     //"ListServices",
@@ -692,8 +692,8 @@ export class GedacPermissions {
             })
         ]
     }
-    
-    
+
+
     // logs
     logs() : PolicyStatement[] {
         const svc = "logs";
@@ -707,11 +707,11 @@ export class GedacPermissions {
                     //"ListTagsForLogGroup",
                     //"TagLogGroup",
                     //"UntagLogGroup",
-                    
+
                     "*LogStream",
                     //"CreateLogStream",
                     //"DeleteLogStream",
-                    
+
                     "*RetentionPolicy",
                     //"DeleteRetentionPolicy",
                     //"PutRetentionPolicy",
@@ -719,7 +719,7 @@ export class GedacPermissions {
                     "Describe*",
                     //"DescribeLogGroups",
                     //"DescribeLogStreams",
-        
+
                     "Filter*",
                     "Get*",
                     //"GetLogEvents",
@@ -873,6 +873,3 @@ export class GedacPermissions {
         ]
     }
 }
-
-
-

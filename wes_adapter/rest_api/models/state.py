@@ -28,18 +28,15 @@ class State(Model):
     SYSTEM_ERROR = "SYSTEM_ERROR"
     CANCELED = "CANCELED"
     CANCELING = "CANCELING"
+
     def __init__(self):  # noqa: E501
-        """State - a model defined in OpenAPI
+        """State - a model defined in OpenAPI"""
+        self.openapi_types = {}
 
-        """
-        self.openapi_types = {
-        }
-
-        self.attribute_map = {
-        }
+        self.attribute_map = {}
 
     @classmethod
-    def from_dict(cls, dikt) -> 'State':
+    def from_dict(cls, dikt) -> "State":
         """Returns the dict as a model
 
         :param dikt: A dict.

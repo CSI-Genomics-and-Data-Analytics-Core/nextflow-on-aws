@@ -120,12 +120,12 @@ export class ContextAppParameters {
     this.userId = 'gedac';
     this.userEmail = 'admin@gedac.org';
 
-    this.outputBucketName = 'gedac-bucket-development';
-    this.artifactBucketName = 'gedac-567312705123-ap-southeast-1';
-     //create sring[] 
+    this.outputBucketName = 'gedac-bucket-dev';
+    this.artifactBucketName = 'gedac-026171442599-ap-southeast-1';
+     //create sring[]
     this.readBucketArns = ['arn:aws:s3:::ngi-igenomes'];
 
-    this.readWriteBucketArns = ['arn:aws:s3:::gedac-bucket-development', 'arn:aws:s3:::gedac-567312705123-ap-southeast-1'];
+    this.readWriteBucketArns = ['arn:aws:s3:::gedac-bucket-dev', 'arn:aws:s3:::gedac-bucket', 'arn:aws:s3:::gedac-connect-dev', 'arn:aws:s3:::gedac-connect', 'arn:aws:s3:::gedac-026171442599-ap-southeast-1'];
 
     this.kmsDecryptPolicy = getEnvStringOrDefault(node, "KMS_DECRYPT_POLICY", undefined);
 

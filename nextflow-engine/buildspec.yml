@@ -7,7 +7,7 @@ env:
     NEXTFLOW_IMAGE_NAME: "nextflow"
     NEXTFLOW_VERSION: "23.10.1"
     AWS_REGION: "ap-southeast-1"
-    AWS_ACCOUNT_ID: 862363609447
+    AWS_ACCOUNT_ID: <aws_account_id>
 
 phases:
   pre_build:
@@ -28,8 +28,8 @@ phases:
         else
           echo "ECR repository ${NEXTFLOW_IMAGE_NAME} does not exist. Creating..."
           aws ecr create-repository --repository-name ${NEXTFLOW_IMAGE_NAME} --region ${AWS_REGION}
-        fi      
-      - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NEXTFLOW_IMAGE_URI}     
+        fi
+      - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${NEXTFLOW_IMAGE_URI}
 
 artifacts:
   files:

@@ -18,27 +18,27 @@ Options
 
     -i, --install-version       [dist_release] | release | latest | develop
             Version of Amazon EBS Autoscale to install.
-            
+
                 "dist_release" uses 'aws s3 cp' to retrieve a tarball from an S3 bucket.
                     requires setting --artifact-root-url to an S3 URL.
 
-                "release" uses 'curl' or 'aws s3 cp' to retrieve a tarball from a publicly 
+                "release" uses 'curl' or 'aws s3 cp' to retrieve a tarball from a publicly
                     accessible location - i.e. an upstream distribution.
                     requires setting --artifact-root-url to either an S3 or HTTP URL.
-                
-                "latest" uses 'curl' to retrieve the latest released version of 
+
+                "latest" uses 'curl' to retrieve the latest released version of
                     amazon-ebs-autoscale from GitHub
-                
+
                 "develop" uses 'git' to clone the source code of amazon-ebs-autoscale
                     from GitHub.
-    
+
     -a, --artifact-root-url     s3://... | https:// ...
             Root URL where amazon-ebs-autoscale tarballs can be retrieved.
             Required if --install-version is "dist_release" or "release".
-    
+
     -f, --file-system           [btrfs] | lvm.ext4
             File system to use
-    
+
     -h, --help
             Print help and exit
 
@@ -100,7 +100,7 @@ function latest() {
     echo "ebs_autoscale_version = $ebs_autoscale_version"
     curl --silent --fail --retry 3 --retry-connrefused  -L \
         "https://github.com/awslabs/amazon-ebs-autoscale/archive/${ebs_autoscale_version}.tar.gz" \
-        -o ./amazon-ebs-autoscale.tar.gz 
+        -o ./amazon-ebs-autoscale.tar.gz
 
     tar -xzvf ./amazon-ebs-autoscale.tar.gz
     mv ./amazon-ebs-autoscale*/ ./amazon-ebs-autoscale
@@ -123,7 +123,7 @@ function s3CopyWithRetry() {
             echo "$s3_path is not an S3 path with a bucket and key. aborting"
             exit 1
         fi
-        
+
         aws s3 cp --no-progress "$s3_path" "$destination" &&
         [[ $(LC_ALL=C ls -dn -- "$destination" | awk '{print $5; exit}') -eq "$content_length" ]] &&
         break || echo "attempt $i to copy $s3_path failed";
@@ -202,7 +202,7 @@ function install() {
     echo "docker_storage_driver = $docker_storage_driver"
 
     local docker_storage_options="DOCKER_STORAGE_OPTIONS=\"--storage-driver $docker_storage_driver\""
-    
+
     cp -au /var/lib/docker /var/lib/docker.bk
     rm -rf /var/lib/docker/*
 

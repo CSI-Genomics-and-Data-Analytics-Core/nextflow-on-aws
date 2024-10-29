@@ -24,7 +24,7 @@ Setup core networking infrastructure, VPC and three pairs of public and private 
 
 Along with S3 bucket, DynamoDB and SSM parameters (to use under compute infrastructure)
 
-Configurations available in `cdk-typescript/lib/env/context-app-parameters.ts` (Namespaces,S3 bucket(s), instanceTypes, maxVCPUS, tags, and more) 
+Configurations available in `cdk-typescript/lib/env/context-app-parameters.ts` (Namespaces,S3 bucket(s), instanceTypes, maxVCPUS, tags, and more)
 
 
 `context`

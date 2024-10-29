@@ -15,7 +15,16 @@ class Log(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name=None, cmd=None, start_time=None, end_time=None, stdout=None, stderr=None, exit_code=None):  # noqa: E501
+    def __init__(
+        self,
+        name=None,
+        cmd=None,
+        start_time=None,
+        end_time=None,
+        stdout=None,
+        stderr=None,
+        exit_code=None,
+    ):  # noqa: E501
         """Log - a model defined in OpenAPI
 
         :param name: The name of this Log.  # noqa: E501
@@ -34,23 +43,23 @@ class Log(Model):
         :type exit_code: int
         """
         self.openapi_types = {
-            'name': str,
-            'cmd': List[str],
-            'start_time': str,
-            'end_time': str,
-            'stdout': str,
-            'stderr': str,
-            'exit_code': int
+            "name": str,
+            "cmd": List[str],
+            "start_time": str,
+            "end_time": str,
+            "stdout": str,
+            "stderr": str,
+            "exit_code": int,
         }
 
         self.attribute_map = {
-            'name': 'name',
-            'cmd': 'cmd',
-            'start_time': 'start_time',
-            'end_time': 'end_time',
-            'stdout': 'stdout',
-            'stderr': 'stderr',
-            'exit_code': 'exit_code'
+            "name": "name",
+            "cmd": "cmd",
+            "start_time": "start_time",
+            "end_time": "end_time",
+            "stdout": "stdout",
+            "stderr": "stderr",
+            "exit_code": "exit_code",
         }
 
         self._name = name
@@ -62,7 +71,7 @@ class Log(Model):
         self._exit_code = exit_code
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Log':
+    def from_dict(cls, dikt) -> "Log":
         """Returns the dict as a model
 
         :param dikt: A dict.

@@ -21,18 +21,14 @@ class RunId(Model):
         :param run_id: The run_id of this RunId.  # noqa: E501
         :type run_id: str
         """
-        self.openapi_types = {
-            'run_id': str
-        }
+        self.openapi_types = {"run_id": str}
 
-        self.attribute_map = {
-            'run_id': 'run_id'
-        }
+        self.attribute_map = {"run_id": "run_id"}
 
         self._run_id = run_id
 
     @classmethod
-    def from_dict(cls, dikt) -> 'RunId':
+    def from_dict(cls, dikt) -> "RunId":
         """Returns the dict as a model
 
         :param dikt: A dict.

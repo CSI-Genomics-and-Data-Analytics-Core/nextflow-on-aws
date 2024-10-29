@@ -88,7 +88,7 @@ export class ApiProxy extends Construct {
     });
 
     const apiTarget = props.lambda ? new LambdaIntegration(props.lambda) : this.renderHttpTarget(props.loadBalancer!);
-    
+
     this.restApi.root.addProxy({
       defaultIntegration: apiTarget,
       defaultCorsPreflightOptions: {

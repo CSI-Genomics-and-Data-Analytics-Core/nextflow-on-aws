@@ -212,14 +212,14 @@ export class Batch extends Construct {
     // const cfnLaunchTemplate = launchTemplateProps ? new CfnLaunchTemplate(this, "cfnLaunchTemplate", launchTemplateProps) : undefined;
 
     let userdata = UserData.custom( options.launchTemplateData || "");
-    
-  
+
+
 
     // new launchTemplate
     const launchTemplate = new LaunchTemplate(this, "LaunchTemplate", {
       userData: userdata,
     });
-    
+
 
     const instanceProfile = new InstanceProfile(this, "ComputeProfile", {
       role: this.role,

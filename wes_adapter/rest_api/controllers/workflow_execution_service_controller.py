@@ -14,9 +14,7 @@ from rest_api.models import (
 from rest_api.exception.Exceptions import InvalidRequestError
 
 from amazon_genomics.util.method_logger import logged
-from amazon_genomics.wes.adapters import (
-    NextflowWESAdapter
-)
+from amazon_genomics.wes.adapters import NextflowWESAdapter
 
 
 ENGINE_NAME = os.getenv("ENGINE_NAME")

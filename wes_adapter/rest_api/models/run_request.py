@@ -15,7 +15,15 @@ class RunRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, workflow_params=None, workflow_type=None, workflow_type_version=None, tags=None, workflow_engine_parameters=None, workflow_url=None):  # noqa: E501
+    def __init__(
+        self,
+        workflow_params=None,
+        workflow_type=None,
+        workflow_type_version=None,
+        tags=None,
+        workflow_engine_parameters=None,
+        workflow_url=None,
+    ):  # noqa: E501
         """RunRequest - a model defined in OpenAPI
 
         :param workflow_params: The workflow_params of this RunRequest.  # noqa: E501
@@ -32,21 +40,21 @@ class RunRequest(Model):
         :type workflow_url: str
         """
         self.openapi_types = {
-            'workflow_params': object,
-            'workflow_type': str,
-            'workflow_type_version': str,
-            'tags': Dict[str, str],
-            'workflow_engine_parameters': Dict[str, str],
-            'workflow_url': str
+            "workflow_params": object,
+            "workflow_type": str,
+            "workflow_type_version": str,
+            "tags": Dict[str, str],
+            "workflow_engine_parameters": Dict[str, str],
+            "workflow_url": str,
         }
 
         self.attribute_map = {
-            'workflow_params': 'workflow_params',
-            'workflow_type': 'workflow_type',
-            'workflow_type_version': 'workflow_type_version',
-            'tags': 'tags',
-            'workflow_engine_parameters': 'workflow_engine_parameters',
-            'workflow_url': 'workflow_url'
+            "workflow_params": "workflow_params",
+            "workflow_type": "workflow_type",
+            "workflow_type_version": "workflow_type_version",
+            "tags": "tags",
+            "workflow_engine_parameters": "workflow_engine_parameters",
+            "workflow_url": "workflow_url",
         }
 
         self._workflow_params = workflow_params
@@ -57,7 +65,7 @@ class RunRequest(Model):
         self._workflow_url = workflow_url
 
     @classmethod
-    def from_dict(cls, dikt) -> 'RunRequest':
+    def from_dict(cls, dikt) -> "RunRequest":
         """Returns the dict as a model
 
         :param dikt: A dict.

@@ -77,8 +77,8 @@ class NextflowWESAdapter(BatchAdapter):
                 fields @message, @logStream
                 | filter @logStream = "{log_stream}"
                 | filter @message like /TaskPollingMonitor - Task completed/
-                | parse 'name: *;' as name 
-                | parse 'id: *;' as id 
+                | parse 'name: *;' as name
+                | parse 'id: *;' as id
                 | parse 'status: *;' as status
                 | parse 'exit: *;' as exit
                 | parse 'error: *;' as error

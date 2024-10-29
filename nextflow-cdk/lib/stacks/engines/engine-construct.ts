@@ -31,7 +31,7 @@ export abstract class EngineConstruct extends Construct {
     new CfnOutput(Stack.of(this), "ApiKey", { value: outputs.apiKey });
   }
 
-  // create ptr to the lambda function from aws-cdk-lib 
+  // create ptr to the lambda function from aws-cdk-lib
   public renderPythonLambda(scope: Construct, id: string, role: IRole, environment: Record<string, string>, vpc?: IVpc, vpcSubnets?: SubnetSelection): Function {
     return new Function(scope, id, {
       vpc,

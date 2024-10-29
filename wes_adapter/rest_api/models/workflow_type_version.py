@@ -21,18 +21,14 @@ class WorkflowTypeVersion(Model):
         :param workflow_type_version: The workflow_type_version of this WorkflowTypeVersion.  # noqa: E501
         :type workflow_type_version: List[str]
         """
-        self.openapi_types = {
-            'workflow_type_version': List[str]
-        }
+        self.openapi_types = {"workflow_type_version": List[str]}
 
-        self.attribute_map = {
-            'workflow_type_version': 'workflow_type_version'
-        }
+        self.attribute_map = {"workflow_type_version": "workflow_type_version"}
 
         self._workflow_type_version = workflow_type_version
 
     @classmethod
-    def from_dict(cls, dikt) -> 'WorkflowTypeVersion':
+    def from_dict(cls, dikt) -> "WorkflowTypeVersion":
         """Returns the dict as a model
 
         :param dikt: A dict.
