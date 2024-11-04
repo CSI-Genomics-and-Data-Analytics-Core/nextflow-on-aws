@@ -12,30 +12,19 @@ General Overview of Nextflow Compute Environment via AWS Batch.
 
 ![AWS](docs/nextflow-on-aws-infrastructure.jpg)
 
+## Setup
 
-# Project Directories
+1. **Build AWS-Friendly Nextflow docker, push to ECR**
+2. **[Optional] Create WesAdapter.zip**
+3. **Use CDK to provisioninng the entire infrastructure.**
 
-This project follows a specific directory structure to organize its files and resources. Here is an overview of the main directories:
-
-## nextflow-engine
+### Nextflow Engine dockerrization
 
 The `nextflow-engine` directory used for Nextflow Engine dockerrization, contains an AWS codebuild buildspec.yaml to build image and pushes to ECR.
 
-## cdk-typescript
-
-The `nextflow-cdk` directory contains all the source code files for the CDK. This is where you will find the AWS infrastructure stacks.
-
-
-## wes_adapter
-
+### WES Adaptoer Modificaiton (Optional)
 The `wes_adapter` directory contains python code for wes_adapter Lambda.
 
-## docs
+### Provisioning Infrastructure
 
-The `docs` directory contains documentation and diagrams.
-
-
-
-This diagram illustrates the flow of the CDK code and how it works together with other components in the project.
-
-![CDK](docs/cdk-flow.png)
+The `nextflow-cdk` directory contains all the source code files for the CDK. This is where you will find the AWS infrastructure stacks.
