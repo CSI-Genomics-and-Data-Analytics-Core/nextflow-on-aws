@@ -1,3 +1,4 @@
+import 'dotenv/config'; // This loads environment variables from .env
 import { getEnvNumber, getEnvBoolOrDefault, getEnvString, getEnvStringListOrDefault, getEnvStringOrDefault } from ".";
 import { InstanceType } from "aws-cdk-lib/aws-ec2";
 import { Node } from "constructs";
@@ -11,10 +12,6 @@ export class ContextAppParameters {
    * Name of the project.
    */
   public readonly projectName: string;
-  /**
-   * Name of the context.
-   */
-  public readonly contextName: string;
   /**
    * The user's ID.
    */
@@ -115,17 +112,16 @@ export class ContextAppParameters {
 
   constructor(node: Node) {
     const instanceTypeStrings = getEnvStringListOrDefault(node, "BATCH_COMPUTE_INSTANCE_TYPES");
-    this.projectName = 'gedac';
-    this.contextName = 'nextflow-engine';
-    this.userId = 'gedac';
-    this.userEmail = 'admin@gedac.org';
+    this.projectName =  process.env.PROJECT_NAME || 'gedac';
+    this.userId = process.env.USER_ID || 'gedac';
+    this.userEmail = process.env.USER_EMAIL || '';
 
-    this.outputBucketName = 'gedac-bucket-dev';
-    this.artifactBucketName = 'gedac-026171442599-ap-southeast-1';
-     //create sring[]
-    this.readBucketArns = ['arn:aws:s3:::ngi-igenomes'];
+    this.outputBucketName = process.env.OUTPUT_BUCKET_NAME || '';
+    this.artifactBucketName = process.env.ARTIFACT_BUCKET_NAME || '';
 
-    this.readWriteBucketArns = ['arn:aws:s3:::gedac-bucket-dev', 'arn:aws:s3:::gedac-bucket', 'arn:aws:s3:::gedac-connect-dev', 'arn:aws:s3:::gedac-connect', 'arn:aws:s3:::gedac-026171442599-ap-southeast-1'];
+    this.readBucketArns = process.env.READ_BUCKET_ARNS ? process.env.READ_BUCKET_ARNS.split(',') : ['arn:aws:s3:::ngi-igenomes'];
+
+    this.readWriteBucketArns = process.env.READ_WRITE_BUCKET_ARNS ? process.env.READ_WRITE_BUCKET_ARNS.split(',') : [];
 
     this.kmsDecryptPolicy = getEnvStringOrDefault(node, "KMS_DECRYPT_POLICY", undefined);
 
@@ -194,7 +190,6 @@ export class ContextAppParameters {
       memoryLimitMiB: oneGBinMiB * 4,
       environment: {
         PROJECT_NAME: this.projectName,
-        CONTEXT_NAME: this.contextName,
         USER_ID: this.userId,
         ENGINE_NAME: this.engineName,
         ...additionalEnvVars,

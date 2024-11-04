@@ -4,8 +4,7 @@ An AWS-friendly mirror of Nextflow.
 
 ### Running locally with CodeBuild
 
-This package is buildable with AWS CodeBuild. You can use the AWS CodeBuild agent to run CodeBuild builds on a local
-machine.
+This package is buildable with AWS CodeBuild. You can use the AWS CodeBuild agent to run CodeBuild builds on a local machine.
 
 You only need to set up the build image the first time you run the agent, or when the image has changed. To set up the
 build image, use the following commands:

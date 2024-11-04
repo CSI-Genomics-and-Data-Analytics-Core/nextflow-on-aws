@@ -75,7 +75,6 @@ new MainStack(app, `${PRODUCT_NAME}-Core`, {
     [APP_TAG_KEY]: APP_NAME,
     [INFRASTRUCTURE_VERSION_KEY]: infrastructureVersion,
     [PROJECT_TAG_KEY]: contextParameters.projectName,
-    [CONTEXT_TAG_KEY]: contextParameters.contextName,
     [USER_ID_TAG_KEY]: contextParameters.userId,
     [USER_EMAIL_TAG_KEY]: contextParameters.userEmail,
     [ENGINE_TAG_KEY]: contextParameters.engineName,

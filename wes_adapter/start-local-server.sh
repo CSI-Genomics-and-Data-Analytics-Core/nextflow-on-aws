@@ -1,7 +1,7 @@
 #! /bin/bash
 export ENGINE_NAME=nextflow # cromwell / miniwdl / snakemake / nextflow
-export JOB_QUEUE=arn:aws:batch:ap-southeast-1:026171442599:job-queue/BatchTaskBatchJobQueue15-Z8ChW8TCIoRovf6l
-export JOB_DEFINITION=arn:aws:batch:ap-southeast-1:026171442599:job-definition/nextflowNextflowEngineN-901d0b4fa72e023:1
+export JOB_QUEUE=arn:aws:batch:ap-southeast-1:862363609447:job-queue/BatchTaskBatchJobQueue15-Z8ChW8TCIoRovf6l
+export JOB_DEFINITION=arn:aws:batch:ap-southeast-1:862363609447:job-definition/nextflowNextflowEngineN-901d0b4fa72e023:1
 export ENGINE_LOG_GROUP=
 
 export AWS_DEFAULT_REGION=ap-southeast-1

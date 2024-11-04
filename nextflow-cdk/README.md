@@ -1,5 +1,35 @@
-# Nextflow Infrastructure provisioning via CDK TypeScript
+# Nextflow Infrastructure provisioning via CDK (TypeScript)
 
+## Setup
+
+### Intall dependencies
+
+`npm install`
+
+### Deploy via CDK
+
+Setup .env file, refered to the .env.local.
+```
+PROJECT_NAME=
+USER_ID=
+USER_EMAIL=
+
+//existing bucket ARNs
+OUTPUT_BUCKET_NAME=
+ARTIFACT_BUCKET_NAME=
+
+//comma seperated s3 ARNS
+READ_BUCKET_ARNS=arn:aws:s3:::ngi-igenomes
+READ_WRITE_BUCKET_ARNS=
+```
+
+Run,
+
+`npm run cdk deploy`
+
+### Generate Cloudformation YAML
+
+`npm run cdk synth > cloudformation.yml`
 
 ## Project Structure
 
@@ -13,7 +43,7 @@ The `bin` directory possess the bootstrap scripts for each infrastructure.
 
 Create permission policies for,
 
-1. Provisioning `core` and `context` infrastructures via CDK script
+1. Provisioning `core` infrastructure via CDK script
 2. Authorization to call WES REST API.
 
 
@@ -23,11 +53,6 @@ Create permission policies for,
 Setup core networking infrastructure, VPC and three pairs of public and private subnets for each availablity zone.
 
 Along with S3 bucket, DynamoDB and SSM parameters (to use under compute infrastructure)
-
-Configurations available in `cdk-typescript/lib/env/context-app-parameters.ts` (Namespaces,S3 bucket(s), instanceTypes, maxVCPUS, tags, and more)
-
-
-`context`
 
 Setup Nextflow compute resources, AWS Batch queues, Lambda, AWS Gateway and such.
 
@@ -39,25 +64,3 @@ The `lib` directory contains all the coding scripts in modulrized manner.
 ### assets
 
 The `assets` directory contains static files needed by CDK script, eg: wes-adapter.zip.
-
-
-
-## Commands
-
-### Intall dependencies
-
-`npm install`
-
-### Deploy via CDK
-
-Choose the bootstrap script on `cdk.json`  ( core or context)
-
-` "app": "npx ts-node --prefer-ts-exts bin/core/app.ts" `
-
-Run,
-
-`npm run cdk deploy`
-
-### Generate Cloudformation YAML
-
-`npm run cdk synth > cloudformation.yml`

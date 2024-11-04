@@ -1,27 +1,30 @@
 # Nextflow Runner on AWS Infrastructure
+The codebase was retrived from the [AWS AGC Project](https://github.com/aws/amazon-genomics-cli).
+Since the AGC project has been archived by the AWS team, it no longer receives updates for the latest Nextflow versions or long-term support for nf-core pipelines.
 
-Nextflow is a workflow framework and domain-specific language (DSL) for scalable and reproducible scientific workflows.
+Our focus is solely on the Nextflow infrastructure, with utilizing the WES API standard.
 
-Nextflow can be run either locally or on a dedicated EC2 instance. This AWS infrastructure is to run Nextflow using AWS Batch in a managed and cost effective fashion.
+Nextflow is a workflow framework and domain-specific language (DSL) for scalable and reproducible scientific workflows, it can be run either locally or on a dedicated EC2 instance.
+
+This AWS infrastructure is to run Nextflow using AWS Batch in a managed and cost effective fashion.
 
 General Overview of Nextflow Compute Environment via AWS Batch.
 
 ![AWS](docs/nextflow-on-aws-infrastructure.jpg)
 
-The codebase was retrived from [AWS AGC Project](https://github.com/aws/amazon-genomics-cli) and customized, faciliates much freedom to us.
-Since the AGC project not maintaining by the AWS team, no updates for latest nextflow versions or supporting nfcore pipelines in the long run.
 
 # Project Directories
 
 This project follows a specific directory structure to organize its files and resources. Here is an overview of the main directories:
 
-## cdk-typescript
-
-The `cdk-typescript` directory contains all the source code files for the CDK. This is where you will find the AWS infrastructure stacks.
-
 ## nextflow-engine
 
 The `nextflow-engine` directory used for Nextflow Engine dockerrization, contains an AWS codebuild buildspec.yaml to build image and pushes to ECR.
+
+## cdk-typescript
+
+The `nextflow-cdk` directory contains all the source code files for the CDK. This is where you will find the AWS infrastructure stacks.
+
 
 ## wes_adapter
 

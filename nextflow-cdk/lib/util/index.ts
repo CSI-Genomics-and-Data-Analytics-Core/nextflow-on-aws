@@ -49,7 +49,7 @@ export const getCommonParameterList = (scope: Construct, keySuffix: string, leng
 };
 
 export const createEcrImage = (scope: Construct): EcrImage => {
-  const accountId = '026171442599';
+  const accountId = '862363609447';
   const region = "ap-southeast-1";
   const tag = "23.10.1";
   const repositoryName = "nextflow";
