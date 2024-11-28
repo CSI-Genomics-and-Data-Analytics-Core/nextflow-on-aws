@@ -1,4 +1,4 @@
-import { Fn, Names, Stack } from "aws-cdk-lib";
+import { Fn, Names, Stack, Tags } from "aws-cdk-lib";
 import { CfnComputeEnvironment, CfnJobQueue, FargateComputeEnvironment, IComputeEnvironment, ManagedEc2EcsComputeEnvironment, EcsMachineImage, AllocationStrategy, EcsMachineImageType } from "aws-cdk-lib/aws-batch";
 import { CfnLaunchTemplate, InstanceType, IVpc, Vpc, SubnetSelection, LaunchTemplate, IMachineImage, MachineImage, UserData } from "aws-cdk-lib/aws-ec2";
 import {
@@ -19,6 +19,7 @@ import { batchArn, ec2Arn } from "../util";
 import { APP_NAME, APP_TAG_KEY, TAGGED_RESOURCE_TYPES } from "../constants";
 import { Construct } from "constructs";
 import { ComputeResourceType } from "../types"
+
 export interface ComputeOptions {
   /**
    * The VPC to run the batch in.
@@ -234,9 +235,8 @@ export class Batch extends Construct {
     //   "us-west-2": "ami-0c6ee50d15e7364d4",
     // }) as EcsMachineImage;
 
-    return new ManagedEc2EcsComputeEnvironment(this, "ComputeEnvironment", {
+    const computeEnvironment = new ManagedEc2EcsComputeEnvironment(this, "ComputeEnvironment", {
         vpc: options.vpc,
-        // images: [machineImage],
         instanceRole: instanceProfile.role,
         instanceTypes: getInstanceTypesForBatch(options.instanceTypes, computeType, Stack.of(this).region),
         launchTemplate: launchTemplate,
@@ -245,6 +245,14 @@ export class Batch extends Construct {
         allocationStrategy: computeType == "SPOT" ? AllocationStrategy.SPOT_CAPACITY_OPTIMIZED : AllocationStrategy.BEST_FIT,
         spot: computeType == "SPOT",
     });
+
+    if (options.resourceTags) {
+      for (const [key, value] of Object.entries(options.resourceTags)) {
+        Tags.of(computeEnvironment).add(key, value);
+      }
+    }
+
+    return computeEnvironment;
   }
 
   private renderLaunchTemplateProps(launchTemplateData?: string, resourceTags?: { [p: string]: string }) {

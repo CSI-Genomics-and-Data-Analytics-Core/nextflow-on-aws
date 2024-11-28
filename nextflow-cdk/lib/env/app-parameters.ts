@@ -13,6 +13,10 @@ export class ContextAppParameters {
    */
   public readonly projectName: string;
   /**
+   * Name of the run.
+   */
+  public readonly runName: string;
+  /**
    * The user's ID.
    */
   public readonly userId: string;
@@ -112,7 +116,8 @@ export class ContextAppParameters {
 
   constructor(node: Node) {
     const instanceTypeStrings = getEnvStringListOrDefault(node, "BATCH_COMPUTE_INSTANCE_TYPES");
-    this.projectName =  process.env.PROJECT_NAME || 'gedac';
+    this.projectName =  process.env.PROJECT_NAME || 'Cloudflow';
+    this.runName =  process.env.RUN || 'rnaseq-1gb';
     this.userId = process.env.USER_ID || 'gedac';
     this.userEmail = process.env.USER_EMAIL || '';
 
@@ -142,7 +147,7 @@ export class ContextAppParameters {
     this.usePublicSubnets = getEnvBoolOrDefault(node, "PUBLIC_SUBNETS", true);
     this.infrastructureVersion = "1.0.0";
 
-    const tagsJson = getEnvStringOrDefault(node, "CUSTOM_TAGS", '{"ENV":"Development","USER":"GEDAC"}' );
+    const tagsJson = getEnvStringOrDefault(node, "CUSTOM_TAGS", '{"Environment":"development","Project":"Cloudflow", "Run":"RNAseq-1GB"}' );
 
     if (tagsJson != null) {
       this.customTags = JSON.parse(tagsJson);
