@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "81bbe220-9519-473c-bfa8-508074c148a0",
+		"name": "WES REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18997411"
+	},
+	"item": [
+		{
+			"name": "Get Runs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{URL}}/runs",
+					"protocol": "https",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"runs"
+					],
+					"query": [
+						{
+							"key": "page_size",
+							"value": "8",
+							"disabled": true
+						},
+						{
+							"key": "page_token",
+							"value": "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",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Service Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{URL}}/service-info",
+					"protocol": "https",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"service-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Run by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "www.postman-eco.com",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://{{URL}}/runs/{{RUN}}",
+					"protocol": "https",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"runs",
+						"{{RUN}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Run Status by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{URL}}/runs/{{RUN}}/status",
+					"protocol": "https",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"runs",
+						"{{RUN}}",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Run Workflow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function() {",
+							"       pm.response.to.have.status(200);",
+							"       const response = pm.response.json();",
+							"       pm.collectionVariables.set('RUN', response.run_id);",
+							"})",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "60lz6e9wje.execute-api.ap-southeast-1.amazonaws.com",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "workflow_type",
+							"value": "NEXTFLOW",
+							"type": "text"
+						},
+						{
+							"key": "workflow_type_version",
+							"value": "dsl2",
+							"type": "text"
+						},
+						{
+							"key": "workflow_url",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://{{URL}}/runs",
+					"protocol": "https",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"runs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel RUN by ID",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "60lz6e9wje.execute-api.ap-southeast-1.amazonaws.com",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://{{URL}}/runs/{{RUN}}/cancel",
+					"protocol": "https",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"runs",
+						"{{RUN}}",
+						"cancel"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "x-api-key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "RUN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "URL",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
