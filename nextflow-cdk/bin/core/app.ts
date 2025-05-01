@@ -9,13 +9,13 @@ import {
   APP_NAME,
   APP_ENV_NAME,
   APP_TAG_KEY,
-  CONTEXT_TAG_KEY,
   PRODUCT_NAME,
   PROJECT_TAG_KEY,
   USER_EMAIL_TAG_KEY,
   USER_ID_TAG_KEY,
   ENGINE_TAG_KEY,
   ENGINE_TYPE_TAG_KEY,
+  RUN_TAG_KEY,
 } from "../../lib/constants";
 import { ContextAppParameters } from "../../lib/env";
 
@@ -75,6 +75,7 @@ new MainStack(app, `${PRODUCT_NAME}-Core`, {
     [APP_TAG_KEY]: APP_NAME,
     [INFRASTRUCTURE_VERSION_KEY]: infrastructureVersion,
     [PROJECT_TAG_KEY]: contextParameters.projectName,
+    [RUN_TAG_KEY]: "rnaseq",
     [USER_ID_TAG_KEY]: contextParameters.userId,
     [USER_EMAIL_TAG_KEY]: contextParameters.userEmail,
     [ENGINE_TAG_KEY]: contextParameters.engineName,
