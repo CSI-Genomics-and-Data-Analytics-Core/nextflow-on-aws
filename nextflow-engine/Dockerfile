@@ -13,7 +13,7 @@ RUN yum update -y \
   curl \
   hostname \
   which \
-  "java-11-amazon-corretto-headless(x86-64)" \
+  java-17-amazon-corretto-headless \
   unzip \
   jq \
   && yum clean -y all
@@ -25,7 +25,7 @@ RUN curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/
   && /tmp/aws/install -b /usr/bin \
   && rm -rf /tmp/aws*
 
-ENV JAVA_HOME /usr/lib/jvm/jre-openjdk/
+ENV JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
 
 # invoke nextflow once to download dependencies
 RUN nextflow -version

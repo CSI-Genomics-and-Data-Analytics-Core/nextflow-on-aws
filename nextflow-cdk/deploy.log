@@ -1,0 +1,129 @@
+Starting CDK deployment
+[Warning at /Gedac-Core/ContextSubnet0] No routeTableId was provided to the subnet at 'Gedac-Core/ContextSubnet0'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171) [ack: @aws-cdk/aws-ec2:noSubnetRouteTableId]
+
+✨  Synthesis time: 2.91s
+
+Gedac-Core: start: Building 980ca8b10a7b1ef6b47d084db53eb43982f9869837ed3f53807571633b9cb1ad
+Gedac-Core: success: Built 980ca8b10a7b1ef6b47d084db53eb43982f9869837ed3f53807571633b9cb1ad
+Gedac-Core: start: Publishing 980ca8b10a7b1ef6b47d084db53eb43982f9869837ed3f53807571633b9cb1ad:026171442599-ap-southeast-1
+Gedac-Core: success: Published 980ca8b10a7b1ef6b47d084db53eb43982f9869837ed3f53807571633b9cb1ad:026171442599-ap-southeast-1
+Gedac-Core: deploying... [1/1]
+Gedac-Core: creating CloudFormation changeset...
+Gedac-Core |  0/43 | 10:11:32 pm | UPDATE_IN_PROGRESS   | AWS::CloudFormation::Stack            | Gedac-Core User Initiated
+Gedac-Core |  0/43 | 10:11:37 pm | CREATE_IN_PROGRESS   | AWS::EC2::LaunchTemplate              | Batch/TaskBatchSpotV2/LaunchTemplate (BatchTaskBatchSpotV2LaunchTemplate3258B2B9) 
+Gedac-Core |  0/43 | 10:11:37 pm | CREATE_IN_PROGRESS   | AWS::IAM::Role                        | Batch/TaskBatchSpotV2/BatchRole (BatchTaskBatchSpotV2BatchRole9DA79645) 
+Gedac-Core |  0/43 | 10:11:37 pm | CREATE_IN_PROGRESS   | AWS::IAM::Role                        | Batch/TaskBatchV2/BatchRole (BatchTaskBatchV2BatchRole6E6A7E90) 
+Gedac-Core |  0/43 | 10:11:37 pm | CREATE_IN_PROGRESS   | AWS::EC2::SecurityGroup               | Batch/TaskBatchV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchV2ComputeEnvironmentSecurityGroup842474FE) 
+Gedac-Core |  0/43 | 10:11:37 pm | CREATE_IN_PROGRESS   | AWS::EC2::SecurityGroup               | Batch/TaskBatchSpotV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchSpotV2ComputeEnvironmentSecurityGroup90E76FEF) 
+Gedac-Core |  0/43 | 10:11:37 pm | CREATE_IN_PROGRESS   | AWS::EC2::LaunchTemplate              | Batch/TaskBatchV2/LaunchTemplate (BatchTaskBatchV2LaunchTemplate293C13CC) 
+Gedac-Core |  0/43 | 10:11:37 pm | UPDATE_IN_PROGRESS   | AWS::CDK::Metadata                    | CDKMetadata/Default (CDKMetadata) 
+Gedac-Core |  1/43 | 10:11:38 pm | UPDATE_COMPLETE      | AWS::CDK::Metadata                    | CDKMetadata/Default (CDKMetadata) 
+Gedac-Core |  1/43 | 10:11:38 pm | CREATE_IN_PROGRESS   | AWS::EC2::LaunchTemplate              | Batch/TaskBatchSpotV2/LaunchTemplate (BatchTaskBatchSpotV2LaunchTemplate3258B2B9) Resource creation Initiated
+Gedac-Core |  1/43 | 10:11:39 pm | CREATE_IN_PROGRESS   | AWS::EC2::LaunchTemplate              | Batch/TaskBatchV2/LaunchTemplate (BatchTaskBatchV2LaunchTemplate293C13CC) Resource creation Initiated
+Gedac-Core |  2/43 | 10:11:39 pm | CREATE_COMPLETE      | AWS::EC2::LaunchTemplate              | Batch/TaskBatchSpotV2/LaunchTemplate (BatchTaskBatchSpotV2LaunchTemplate3258B2B9) 
+Gedac-Core |  3/43 | 10:11:39 pm | CREATE_COMPLETE      | AWS::EC2::LaunchTemplate              | Batch/TaskBatchV2/LaunchTemplate (BatchTaskBatchV2LaunchTemplate293C13CC) 
+Gedac-Core |  3/43 | 10:11:40 pm | CREATE_IN_PROGRESS   | AWS::EC2::SecurityGroup               | Batch/TaskBatchSpotV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchSpotV2ComputeEnvironmentSecurityGroup90E76FEF) Resource creation Initiated
+Gedac-Core |  3/43 | 10:11:40 pm | CREATE_IN_PROGRESS   | AWS::IAM::Role                        | Batch/TaskBatchSpotV2/BatchRole (BatchTaskBatchSpotV2BatchRole9DA79645) Resource creation Initiated
+Gedac-Core |  3/43 | 10:11:40 pm | CREATE_IN_PROGRESS   | AWS::EC2::SecurityGroup               | Batch/TaskBatchV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchV2ComputeEnvironmentSecurityGroup842474FE) Resource creation Initiated
+Gedac-Core |  3/43 | 10:11:40 pm | CREATE_IN_PROGRESS   | AWS::IAM::Role                        | Batch/TaskBatchV2/BatchRole (BatchTaskBatchV2BatchRole6E6A7E90) Resource creation Initiated
+Gedac-Core |  4/43 | 10:11:46 pm | CREATE_COMPLETE      | AWS::EC2::SecurityGroup               | Batch/TaskBatchSpotV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchSpotV2ComputeEnvironmentSecurityGroup90E76FEF) 
+Gedac-Core |  5/43 | 10:11:46 pm | CREATE_COMPLETE      | AWS::EC2::SecurityGroup               | Batch/TaskBatchV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchV2ComputeEnvironmentSecurityGroup842474FE) 
+Gedac-Core |  6/43 | 10:11:56 pm | CREATE_COMPLETE      | AWS::IAM::Role                        | Batch/TaskBatchSpotV2/BatchRole (BatchTaskBatchSpotV2BatchRole9DA79645) 
+Gedac-Core |  7/43 | 10:11:56 pm | CREATE_COMPLETE      | AWS::IAM::Role                        | Batch/TaskBatchV2/BatchRole (BatchTaskBatchV2BatchRole6E6A7E90) 
+Gedac-Core |  7/43 | 10:11:56 pm | CREATE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeProfile (BatchTaskBatchSpotV2ComputeProfile17C5438D) 
+Gedac-Core |  7/43 | 10:11:56 pm | CREATE_IN_PROGRESS   | AWS::IAM::Policy                      | Batch/TaskBatchSpotV2/BatchRole/DefaultPolicy (BatchTaskBatchSpotV2BatchRoleDefaultPolicyC54BC146) 
+Gedac-Core |  7/43 | 10:11:56 pm | CREATE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchSpotV2ComputeEnvironmentInstanceProfileB7B22C3B) 
+Gedac-Core |  7/43 | 10:11:57 pm | CREATE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchV2ComputeEnvironmentInstanceProfileFE79A05A) 
+Gedac-Core |  7/43 | 10:11:57 pm | CREATE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeProfile (BatchTaskBatchV2ComputeProfile30F5F8E0) 
+Gedac-Core |  7/43 | 10:11:57 pm | CREATE_IN_PROGRESS   | AWS::IAM::Policy                      | Batch/TaskBatchV2/BatchRole/DefaultPolicy (BatchTaskBatchV2BatchRoleDefaultPolicy517AF7B7) 
+Gedac-Core |  7/43 | 10:11:58 pm | CREATE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeProfile (BatchTaskBatchSpotV2ComputeProfile17C5438D) Resource creation Initiated
+Gedac-Core |  7/43 | 10:11:58 pm | CREATE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchSpotV2ComputeEnvironmentInstanceProfileB7B22C3B) Resource creation Initiated
+Gedac-Core |  7/43 | 10:11:58 pm | CREATE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchV2ComputeEnvironmentInstanceProfileFE79A05A) Resource creation Initiated
+Gedac-Core |  7/43 | 10:11:58 pm | CREATE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeProfile (BatchTaskBatchV2ComputeProfile30F5F8E0) Resource creation Initiated
+Gedac-Core |  7/43 | 10:11:59 pm | CREATE_IN_PROGRESS   | AWS::IAM::Policy                      | Batch/TaskBatchSpotV2/BatchRole/DefaultPolicy (BatchTaskBatchSpotV2BatchRoleDefaultPolicyC54BC146) Resource creation Initiated
+Gedac-Core |  7/43 | 10:11:59 pm | CREATE_IN_PROGRESS   | AWS::IAM::Policy                      | Batch/TaskBatchV2/BatchRole/DefaultPolicy (BatchTaskBatchV2BatchRoleDefaultPolicy517AF7B7) Resource creation Initiated
+Gedac-Core |  8/43 | 10:12:14 pm | CREATE_COMPLETE      | AWS::IAM::Policy                      | Batch/TaskBatchSpotV2/BatchRole/DefaultPolicy (BatchTaskBatchSpotV2BatchRoleDefaultPolicyC54BC146) 
+Gedac-Core |  9/43 | 10:12:15 pm | CREATE_COMPLETE      | AWS::IAM::Policy                      | Batch/TaskBatchV2/BatchRole/DefaultPolicy (BatchTaskBatchV2BatchRoleDefaultPolicy517AF7B7) 
+Gedac-Core | 10/43 | 10:14:08 pm | CREATE_COMPLETE      | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeProfile (BatchTaskBatchSpotV2ComputeProfile17C5438D) 
+Gedac-Core | 11/43 | 10:14:08 pm | CREATE_COMPLETE      | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchSpotV2ComputeEnvironmentInstanceProfileB7B22C3B) 
+Gedac-Core | 12/43 | 10:14:09 pm | CREATE_COMPLETE      | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchV2ComputeEnvironmentInstanceProfileFE79A05A) 
+Gedac-Core | 13/43 | 10:14:09 pm | CREATE_COMPLETE      | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeProfile (BatchTaskBatchV2ComputeProfile30F5F8E0) 
+Gedac-Core | 13/43 | 10:14:10 pm | CREATE_IN_PROGRESS   | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchSpotV2/ComputeEnvironment (BatchTaskBatchSpotV2ComputeEnvironment7590D929) 
+Gedac-Core | 13/43 | 10:14:10 pm | CREATE_IN_PROGRESS   | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchV2/ComputeEnvironment (BatchTaskBatchV2ComputeEnvironment997B0C3C) 
+Gedac-Core | 13/43 | 10:14:10 pm | CREATE_IN_PROGRESS   | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchSpotV2/ComputeEnvironment (BatchTaskBatchSpotV2ComputeEnvironment7590D929) Resource creation Initiated
+Gedac-Core | 13/43 | 10:14:11 pm | CREATE_IN_PROGRESS   | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchV2/ComputeEnvironment (BatchTaskBatchV2ComputeEnvironment997B0C3C) Resource creation Initiated
+Gedac-Core | 14/43 | 10:14:16 pm | CREATE_COMPLETE      | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchSpotV2/ComputeEnvironment (BatchTaskBatchSpotV2ComputeEnvironment7590D929) 
+Gedac-Core | 15/43 | 10:14:17 pm | CREATE_COMPLETE      | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchV2/ComputeEnvironment (BatchTaskBatchV2ComputeEnvironment997B0C3C) 
+Gedac-Core | 15/43 | 10:14:17 pm | CREATE_IN_PROGRESS   | AWS::Batch::JobQueue                  | Batch/TaskBatchSpotV2/JobQueue (BatchTaskBatchSpotV2JobQueue1FD8EC91) 
+Gedac-Core | 15/43 | 10:14:17 pm | CREATE_IN_PROGRESS   | AWS::Batch::JobQueue                  | Batch/TaskBatchV2/JobQueue (BatchTaskBatchV2JobQueue9EFA1C68) 
+Gedac-Core | 15/43 | 10:14:18 pm | CREATE_IN_PROGRESS   | AWS::Batch::JobQueue                  | Batch/TaskBatchSpotV2/JobQueue (BatchTaskBatchSpotV2JobQueue1FD8EC91) Resource creation Initiated
+Gedac-Core | 15/43 | 10:14:18 pm | CREATE_IN_PROGRESS   | AWS::Batch::JobQueue                  | Batch/TaskBatchV2/JobQueue (BatchTaskBatchV2JobQueue9EFA1C68) Resource creation Initiated
+Gedac-Core | 16/43 | 10:14:23 pm | CREATE_COMPLETE      | AWS::Batch::JobQueue                  | Batch/TaskBatchSpotV2/JobQueue (BatchTaskBatchSpotV2JobQueue1FD8EC91) 
+Gedac-Core | 17/43 | 10:14:24 pm | CREATE_COMPLETE      | AWS::Batch::JobQueue                  | Batch/TaskBatchV2/JobQueue (BatchTaskBatchV2JobQueue9EFA1C68) 
+Gedac-Core | 17/43 | 10:14:24 pm | UPDATE_IN_PROGRESS   | AWS::IAM::Role                        | nextflow-engine/NextflowEngineRole (nextflowengineNextflowEngineRoleB2B5C46F) 
+Gedac-Core | 18/43 | 10:14:40 pm | UPDATE_COMPLETE      | AWS::IAM::Role                        | nextflow-engine/NextflowEngineRole (nextflowengineNextflowEngineRoleB2B5C46F) 
+Gedac-Core | 18/43 | 10:14:42 pm | UPDATE_FAILED        | AWS::IAM::Policy                      | nextflow-engine/NextflowEngineRole/DefaultPolicy (nextflowengineNextflowEngineRoleDefaultPolicyA35D72EA) Unable to retrieve Arn attribute for AWS::Logs::LogGroup, with error message Resource of type 'AWS::Logs::LogGroup' with identifier '{"/properties/LogGroupName":"Gedac-Core-nextflowengineNextflowEngineEngineLogGroup4CF92446-XFTStlzQAd6J"}' was not found.
+Gedac-Core | 18/43 | 10:14:44 pm | UPDATE_ROLLBACK_IN_P | AWS::CloudFormation::Stack            | Gedac-Core The following resource(s) failed to update: [nextflowengineNextflowEngineRoleDefaultPolicyA35D72EA]. 
+Gedac-Core | 18/43 | 10:14:46 pm | UPDATE_IN_PROGRESS   | AWS::CDK::Metadata                    | CDKMetadata/Default (CDKMetadata) 
+Gedac-Core | 17/43 | 10:14:47 pm | UPDATE_COMPLETE      | AWS::CDK::Metadata                    | CDKMetadata/Default (CDKMetadata) 
+Gedac-Core | 17/43 | 10:14:48 pm | UPDATE_IN_PROGRESS   | AWS::IAM::Role                        | nextflow-engine/NextflowEngineRole (nextflowengineNextflowEngineRoleB2B5C46F) 
+Gedac-Core | 16/43 | 10:15:04 pm | UPDATE_COMPLETE      | AWS::IAM::Role                        | nextflow-engine/NextflowEngineRole (nextflowengineNextflowEngineRoleB2B5C46F) 
+Gedac-Core | 17/43 | 10:15:05 pm | UPDATE_COMPLETE      | AWS::IAM::Policy                      | nextflow-engine/NextflowEngineRole/DefaultPolicy (nextflowengineNextflowEngineRoleDefaultPolicyA35D72EA) 
+Gedac-Core | 18/43 | 10:15:08 pm | UPDATE_ROLLBACK_COMP | AWS::CloudFormation::Stack            | Gedac-Core 
+Gedac-Core | 18/43 | 10:15:10 pm | DELETE_IN_PROGRESS   | AWS::Batch::JobQueue                  | Batch/TaskBatchV2/JobQueue (BatchTaskBatchV2JobQueue9EFA1C68) 
+Gedac-Core | 18/43 | 10:15:10 pm | DELETE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeProfile (BatchTaskBatchV2ComputeProfile30F5F8E0) 
+Gedac-Core | 18/43 | 10:15:10 pm | DELETE_IN_PROGRESS   | AWS::IAM::Policy                      | Batch/TaskBatchSpotV2/BatchRole/DefaultPolicy (BatchTaskBatchSpotV2BatchRoleDefaultPolicyC54BC146) 
+Gedac-Core | 18/43 | 10:15:10 pm | DELETE_IN_PROGRESS   | AWS::IAM::Policy                      | Batch/TaskBatchV2/BatchRole/DefaultPolicy (BatchTaskBatchV2BatchRoleDefaultPolicy517AF7B7) 
+Gedac-Core | 18/43 | 10:15:10 pm | DELETE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeProfile (BatchTaskBatchSpotV2ComputeProfile17C5438D) 
+Gedac-Core | 18/43 | 10:15:10 pm | DELETE_IN_PROGRESS   | AWS::Batch::JobQueue                  | Batch/TaskBatchSpotV2/JobQueue (BatchTaskBatchSpotV2JobQueue1FD8EC91) 
+Gedac-Core | 17/43 | 10:15:11 pm | DELETE_COMPLETE      | AWS::IAM::Policy                      | Batch/TaskBatchSpotV2/BatchRole/DefaultPolicy (BatchTaskBatchSpotV2BatchRoleDefaultPolicyC54BC146) 
+Gedac-Core | 16/43 | 10:15:11 pm | DELETE_COMPLETE      | AWS::IAM::Policy                      | Batch/TaskBatchV2/BatchRole/DefaultPolicy (BatchTaskBatchV2BatchRoleDefaultPolicy517AF7B7) 
+Gedac-Core | 15/43 | 10:15:11 pm | DELETE_COMPLETE      | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeProfile (BatchTaskBatchSpotV2ComputeProfile17C5438D) 
+Gedac-Core | 14/43 | 10:15:11 pm | DELETE_COMPLETE      | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeProfile (BatchTaskBatchV2ComputeProfile30F5F8E0) 
+Gedac-Core | 13/43 | 10:16:08 pm | DELETE_COMPLETE      | AWS::Batch::JobQueue                  | Batch/TaskBatchV2/JobQueue (BatchTaskBatchV2JobQueue9EFA1C68) 
+Gedac-Core | 12/43 | 10:16:08 pm | DELETE_COMPLETE      | AWS::Batch::JobQueue                  | Batch/TaskBatchSpotV2/JobQueue (BatchTaskBatchSpotV2JobQueue1FD8EC91) 
+Gedac-Core | 12/43 | 10:16:08 pm | DELETE_IN_PROGRESS   | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchSpotV2/ComputeEnvironment (BatchTaskBatchSpotV2ComputeEnvironment7590D929) 
+Gedac-Core | 12/43 | 10:16:08 pm | DELETE_IN_PROGRESS   | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchV2/ComputeEnvironment (BatchTaskBatchV2ComputeEnvironment997B0C3C) 
+Gedac-Core | 11/43 | 10:16:25 pm | DELETE_COMPLETE      | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchSpotV2/ComputeEnvironment (BatchTaskBatchSpotV2ComputeEnvironment7590D929) 
+Gedac-Core | 10/43 | 10:16:25 pm | DELETE_COMPLETE      | AWS::Batch::ComputeEnvironment        | Batch/TaskBatchV2/ComputeEnvironment (BatchTaskBatchV2ComputeEnvironment997B0C3C) 
+Gedac-Core | 10/43 | 10:16:26 pm | DELETE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchSpotV2ComputeEnvironmentInstanceProfileB7B22C3B) 
+Gedac-Core | 10/43 | 10:16:26 pm | DELETE_IN_PROGRESS   | AWS::EC2::LaunchTemplate              | Batch/TaskBatchSpotV2/LaunchTemplate (BatchTaskBatchSpotV2LaunchTemplate3258B2B9) 
+Gedac-Core | 10/43 | 10:16:26 pm | DELETE_IN_PROGRESS   | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchV2ComputeEnvironmentInstanceProfileFE79A05A) 
+Gedac-Core | 10/43 | 10:16:26 pm | DELETE_IN_PROGRESS   | AWS::EC2::LaunchTemplate              | Batch/TaskBatchV2/LaunchTemplate (BatchTaskBatchV2LaunchTemplate293C13CC) 
+Gedac-Core | 10/43 | 10:16:26 pm | DELETE_IN_PROGRESS   | AWS::EC2::SecurityGroup               | Batch/TaskBatchSpotV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchSpotV2ComputeEnvironmentSecurityGroup90E76FEF) 
+Gedac-Core | 10/43 | 10:16:26 pm | DELETE_IN_PROGRESS   | AWS::EC2::SecurityGroup               | Batch/TaskBatchV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchV2ComputeEnvironmentSecurityGroup842474FE) 
+Gedac-Core |  9/43 | 10:16:27 pm | DELETE_COMPLETE      | AWS::EC2::SecurityGroup               | Batch/TaskBatchSpotV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchSpotV2ComputeEnvironmentSecurityGroup90E76FEF) 
+Gedac-Core |  8/43 | 10:16:27 pm | DELETE_COMPLETE      | AWS::EC2::SecurityGroup               | Batch/TaskBatchV2/ComputeEnvironment/SecurityGroup (BatchTaskBatchV2ComputeEnvironmentSecurityGroup842474FE) 
+Gedac-Core |  7/43 | 10:16:27 pm | DELETE_COMPLETE      | AWS::EC2::LaunchTemplate              | Batch/TaskBatchSpotV2/LaunchTemplate (BatchTaskBatchSpotV2LaunchTemplate3258B2B9) 
+Gedac-Core |  6/43 | 10:16:27 pm | DELETE_COMPLETE      | AWS::EC2::LaunchTemplate              | Batch/TaskBatchV2/LaunchTemplate (BatchTaskBatchV2LaunchTemplate293C13CC) 
+Gedac-Core |  5/43 | 10:16:27 pm | DELETE_COMPLETE      | AWS::IAM::InstanceProfile             | Batch/TaskBatchSpotV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchSpotV2ComputeEnvironmentInstanceProfileB7B22C3B) 
+Gedac-Core |  4/43 | 10:16:27 pm | DELETE_COMPLETE      | AWS::IAM::InstanceProfile             | Batch/TaskBatchV2/ComputeEnvironment/InstanceProfile (BatchTaskBatchV2ComputeEnvironmentInstanceProfileFE79A05A) 
+Gedac-Core |  4/43 | 10:16:27 pm | DELETE_IN_PROGRESS   | AWS::IAM::Role                        | Batch/TaskBatchSpotV2/BatchRole (BatchTaskBatchSpotV2BatchRole9DA79645) 
+Gedac-Core |  4/43 | 10:16:27 pm | DELETE_IN_PROGRESS   | AWS::IAM::Role                        | Batch/TaskBatchV2/BatchRole (BatchTaskBatchV2BatchRole6E6A7E90) 
+Gedac-Core |  3/43 | 10:16:41 pm | DELETE_COMPLETE      | AWS::IAM::Role                        | Batch/TaskBatchSpotV2/BatchRole (BatchTaskBatchSpotV2BatchRole9DA79645) 
+Gedac-Core |  2/43 | 10:16:42 pm | DELETE_COMPLETE      | AWS::IAM::Role                        | Batch/TaskBatchV2/BatchRole (BatchTaskBatchV2BatchRole6E6A7E90) 
+Gedac-Core |  3/43 | 10:16:42 pm | UPDATE_ROLLBACK_COMP | AWS::CloudFormation::Stack            | Gedac-Core 
+
+Failed resources:
+Gedac-Core | 10:14:42 pm | UPDATE_FAILED        | AWS::IAM::Policy                      | nextflow-engine/NextflowEngineRole/DefaultPolicy (nextflowengineNextflowEngineRoleDefaultPolicyA35D72EA) Unable to retrieve Arn attribute for AWS::Logs::LogGroup, with error message Resource of type 'AWS::Logs::LogGroup' with identifier '{"/properties/LogGroupName":"Gedac-Core-nextflowengineNextflowEngineEngineLogGroup4CF92446-XFTStlzQAd6J"}' was not found.
+
+NOTICES         (What's this? https://github.com/aws/aws-cdk/wiki/CLI-Notices)
+
+34892	CDK CLI collects telemetry data on command usage starting at version 2.1100.0 (unless opted out)
+
+	Overview: We do not collect customer content and we anonymize the
+	          telemetry we do collect. See the attached issue for more
+	          information on what data is collected, why, and how to
+	          opt-out. Telemetry will NOT be collected for any CDK CLI
+	          version prior to version 2.1100.0 - regardless of
+	          opt-in/out. You can also view the telemetry we collect by
+	          logging it to a local file, by adding
+	          `--telemetry-file=my/local/file` to any `cdk` command.
+
+	Affected versions: cli: ^2.1100.0
+
+	More information at: https://github.com/aws/aws-cdk/issues/34892
+
+
+If you don’t want to see a notice anymore, use "cdk acknowledge <id>". For example, "cdk acknowledge 34892".
+❌  Gedac-Core failed: ToolkitError: The stack named Gedac-Core failed to deploy: UPDATE_ROLLBACK_COMPLETE: Unable to retrieve Arn attribute for AWS::Logs::LogGroup, with error message Resource of type 'AWS::Logs::LogGroup' with identifier '{"/properties/LogGroupName":"Gedac-Core-nextflowengineNextflowEngineEngineLogGroup4CF92446-XFTStlzQAd6J"}' was not found.
