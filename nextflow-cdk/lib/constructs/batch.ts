@@ -242,7 +242,7 @@ export class Batch extends Construct {
         launchTemplate: launchTemplate,
         vpcSubnets: options.subnets,
         maxvCpus: options.maxVCpus ?? 256,
-        allocationStrategy: computeType == "SPOT" ? AllocationStrategy.SPOT_CAPACITY_OPTIMIZED : AllocationStrategy.BEST_FIT,
+        allocationStrategy: computeType == "SPOT" ? AllocationStrategy.SPOT_CAPACITY_OPTIMIZED : AllocationStrategy.BEST_FIT_PROGRESSIVE,
         spot: computeType == "SPOT",
     });
 

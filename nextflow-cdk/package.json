@@ -6,14 +6,20 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "clean": "rimraf '**/*.js' '**/*.d.ts'"
+    "clean": "rimraf '**/*.js' '**/*.d.ts'",
+    "deploy": "npm run build && cdk deploy --all",
+    "deploy:core": "npm run build && cdk deploy -a 'node bin/core/app.js'",
+    "deploy:permissions": "npm run build && cdk deploy -a 'node bin/permission/app.js'",
+    "deploy:image-builder": "npm run build && cdk deploy -a 'node bin/image-builder/app.js'",
+    "synth": "npm run build && cdk synth",
+    "diff": "npm run build && cdk diff"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",
     "@types/node": "^10.17.27",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
-    "aws-cdk": "2.135.0",
+    "aws-cdk": "^2.1100.1",
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",

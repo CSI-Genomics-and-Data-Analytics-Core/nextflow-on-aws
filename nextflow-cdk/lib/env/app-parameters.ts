@@ -124,9 +124,12 @@ export class ContextAppParameters {
     this.outputBucketName = process.env.OUTPUT_BUCKET_NAME || '';
     this.artifactBucketName = process.env.ARTIFACT_BUCKET_NAME || '';
 
-    this.readBucketArns = process.env.READ_BUCKET_ARNS ? process.env.READ_BUCKET_ARNS.split(',') : ['arn:aws:s3:::ngi-igenomes'];
+    // Default read buckets (always included)
+    const defaultReadBuckets = ['arn:aws:s3:::ngi-igenomes', 'arn:aws:s3:::annotation-cache'];
+    const additionalReadBuckets = process.env.READ_BUCKET_ARNS ? process.env.READ_BUCKET_ARNS.split(',').map(s => s.trim()) : [];
+    this.readBucketArns = [...defaultReadBuckets, ...additionalReadBuckets];
 
-    this.readWriteBucketArns = process.env.READ_WRITE_BUCKET_ARNS ? process.env.READ_WRITE_BUCKET_ARNS.split(',') : [];
+    this.readWriteBucketArns = process.env.READ_WRITE_BUCKET_ARNS ? process.env.READ_WRITE_BUCKET_ARNS.split(',').map(s => s.trim()) : [];
 
     this.kmsDecryptPolicy = getEnvStringOrDefault(node, "KMS_DECRYPT_POLICY", undefined);
 

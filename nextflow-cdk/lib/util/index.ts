@@ -51,7 +51,7 @@ export const getCommonParameterList = (scope: Construct, keySuffix: string, leng
 export const createEcrImage = (scope: Construct): EcrImage => {
   const accountId = '026171442599';
   const region = "ap-southeast-1";
-  const tag = "24.04.4";
+  const tag = "25.10.3";
   const repositoryName = "nextflow";
   const ecrArn = `arn:aws:ecr:${region}:${accountId}:repository/${repositoryName}`;
   const repository = Repository.fromRepositoryAttributes(scope, repositoryName, {

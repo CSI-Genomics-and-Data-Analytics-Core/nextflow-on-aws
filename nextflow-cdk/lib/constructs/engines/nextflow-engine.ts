@@ -20,8 +20,8 @@ export class NextflowEngine extends Engine {
       retryAttempts: 1,
       retryStrategies: [],
       containerProperties: {
-        vcpus: 1,
-        memory: 1024,
+        vcpus: 2,
+        memory: 8192,
         jobRoleArn: props.taskRole.roleArn,
         image: props.ecrImage.imageName,
         command: [],
