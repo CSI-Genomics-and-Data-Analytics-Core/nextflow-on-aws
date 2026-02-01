@@ -19,7 +19,7 @@ export const getContext = (node: Node, key: string): string => {
 
 export const getContextOrDefault = <T extends Maybe<string>>(node: Node, key: string, defaultValue?: T): T => {
   const value = node.tryGetContext(key);
-  return !value || value == "" ? defaultValue : value;
+  return (!value || value == "" ? defaultValue : value) as T;
 };
 
 export const getCommonParameter = (scope: Construct, keySuffix: string): string => {
@@ -49,8 +49,8 @@ export const getCommonParameterList = (scope: Construct, keySuffix: string, leng
 };
 
 export const createEcrImage = (scope: Construct): EcrImage => {
-  const accountId = '026171442599';
-  const region = "ap-southeast-1";
+  const accountId = Stack.of(scope).account;
+  const region = Stack.of(scope).region;
   const tag = "25.10.3";
   const repositoryName = "nextflow";
   const ecrArn = `arn:aws:ecr:${region}:${accountId}:repository/${repositoryName}`;
