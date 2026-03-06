@@ -223,7 +223,7 @@ MAX_VCPUS=256
 # VPC_SUBNETS=subnet-xxx,subnet-yyy
 
 # Optional: Nextflow Version
-NEXTFLOW_VERSION=25.10.2
+NEXTFLOW_VERSION=25.10.4
 
 # Optional: Custom Tags (JSON)
 CUSTOM_TAGS={"Environment":"production","CostCenter":"research"}

@@ -18,7 +18,7 @@ import { NextflowImageBuilder } from "../../lib/constructs/nextflow-image-builde
 export interface NextflowImageBuilderStackProps extends StackProps {
   /**
    * Nextflow version to build
-   * @default "25.10.3"
+   * @default "25.10.4"
    */
   nextflowVersion?: string;
 }
@@ -32,7 +32,7 @@ export class NextflowImageBuilderStack extends Stack {
     // Create the Nextflow image builder
     this.imageBuilder = new NextflowImageBuilder(this, "NextflowImageBuilder", {
       repositoryName: "nextflow",
-      nextflowVersion: props?.nextflowVersion ?? process.env.NEXTFLOW_VERSION ?? "25.10.3",
+      nextflowVersion: props?.nextflowVersion ?? process.env.NEXTFLOW_VERSION ?? "25.10.4",
       triggerInitialBuild: false, // Set to true to trigger build on first deployment
     });
   }

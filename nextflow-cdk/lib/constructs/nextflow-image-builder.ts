@@ -15,7 +15,7 @@ export interface NextflowImageBuilderProps {
 
   /**
    * The Nextflow version to build
-   * @default "25.10.3"
+   * @default "25.10.4"
    */
   readonly nextflowVersion?: string;
 
@@ -50,7 +50,7 @@ export class NextflowImageBuilder extends Construct {
     super(scope, id);
 
     const repositoryName = props.repositoryName ?? "nextflow";
-    const nextflowVersion = props.nextflowVersion ?? "25.10.3";
+    const nextflowVersion = props.nextflowVersion ?? "25.10.4";
     const computeType = props.computeType ?? ComputeType.SMALL;
     const region = Stack.of(this).region;
     const account = Stack.of(this).account;
