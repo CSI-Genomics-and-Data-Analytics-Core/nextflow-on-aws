@@ -56,6 +56,15 @@ fi
 echo "=== CONFIGURATION ==="
 cat ./nextflow.config
 
+# Configure AWS CLI S3 transfer settings to handle transient network errors
+# (e.g. ConnectionResetError) on large genomics files
+echo "== Configuring AWS CLI S3 transfer settings =="
+aws configure set default.s3.max_concurrent_requests 2
+aws configure set default.s3.multipart_threshold 64MB
+aws configure set default.s3.multipart_chunksize 16MB
+aws configure set default.retry.max_attempts 10
+aws configure set default.retry.mode adaptive
+
 # stage in session cache
 # .nextflow directory holds all session information for the current and past runs.
 # it should be `sync`'d with an s3 uri, so that runs from previous sessions can be
