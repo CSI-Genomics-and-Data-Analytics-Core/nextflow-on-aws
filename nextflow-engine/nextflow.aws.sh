@@ -42,18 +42,22 @@ echo "Creating config file: $NF_CONFIG"
 
 # To figure out - batch volumes
 # S3 transfer tuning: reduce sporadic ConnectionResetError (104) during downloads
-# - maxParallelTransfers: limit concurrent S3 ops per job to avoid network congestion
+# - maxParallelTransfers: limit concurrent S3 ops per job (1 = most conservative, avoids per-instance congestion)
 # - maxTransferAttempts: retry transient failures (connection resets)
+# - process retry: re-run failed tasks (transient S3/network errors often succeed on retry)
 cat << EOF > $NF_CONFIG
 workDir = "$NF_WORKDIR"
 process.executor = "awsbatch"
 process.queue = "$NF_JOB_QUEUE"
+process.errorStrategy = "retry"
+process.maxRetries = 5
 aws.batch.cliPath = "$AWS_CLI_PATH"
-aws.batch.maxParallelTransfers = 2
-aws.batch.maxTransferAttempts = 5
+aws.batch.maxParallelTransfers = 5
+aws.batch.maxTransferAttempts = 10
 aws.batch.retryMode = "adaptive"
 env.AWS_RETRY_MODE = "adaptive"
 env.AWS_MAX_ATTEMPTS = "10"
+env.AWS_CONFIG_FILE = "/opt/aws-cli/config"
 EOF
 
 if [[ "$EFS_MOUNT" != "" ]]

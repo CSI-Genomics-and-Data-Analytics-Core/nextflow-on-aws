@@ -18,6 +18,19 @@ chmod a+x /opt/ecs-additions/awscli-shim.sh
 mkdir /opt/aws-cli/bin
 cp /opt/ecs-additions/awscli-shim.sh /opt/aws-cli/bin/aws                  # Used in Nextflow
 
+# AWS config for S3 transfer tuning - reduces ConnectionResetError (104) in task containers
+# Containers using /opt/aws-cli inherit this when AWS_CONFIG_FILE=/opt/aws-cli/config
+mkdir -p /opt/aws-cli
+cat > /opt/aws-cli/config << 'AWSCONFIG'
+[default]
+s3 =
+  max_concurrent_requests = 2
+  multipart_threshold = 64MB
+  multipart_chunksize = 16MB
+retry_mode = adaptive
+max_attempts = 10
+AWSCONFIG
+
 # Remove current symlink
 rm -f /usr/local/aws-cli/v2/current/bin/aws
 cp /opt/ecs-additions/awscli-shim.sh /usr/local/aws-cli/v2/current/bin/aws # Used in Cromwell
