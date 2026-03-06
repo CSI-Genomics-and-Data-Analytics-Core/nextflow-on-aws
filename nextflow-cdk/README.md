@@ -216,6 +216,7 @@ READ_WRITE_BUCKET_ARNS=arn:aws:s3:::bucket3
 # Optional: Batch Configuration
 BATCH_COMPUTE_INSTANCE_TYPES=m5.large,m5.xlarge,r5.large
 MAX_VCPUS=256
+# REQUEST_SPOT_INSTANCES=false  # Use On-Demand for tasks (default: true = Spot)
 
 # Optional: Networking
 # VPC_ID=vpc-xxxxx

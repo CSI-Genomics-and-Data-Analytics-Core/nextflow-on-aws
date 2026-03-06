@@ -144,7 +144,11 @@ export class ContextAppParameters {
     this.adapterDesignation = getEnvStringOrDefault(node, "ADAPTER_DESIGNATION", "wes")!;
 
     this.maxVCpus = 256;
-    this.requestSpotInstances = getEnvBoolOrDefault(node, "REQUEST_SPOT_INSTANCES", true)!;
+    // Read from process.env (.env) first, then CDK context (-c REQUEST_SPOT_INSTANCES=...)
+    const requestSpotEnv = process.env.REQUEST_SPOT_INSTANCES;
+    this.requestSpotInstances = requestSpotEnv !== undefined && requestSpotEnv !== ""
+      ? requestSpotEnv.toLowerCase() === "true"
+      : (getEnvBoolOrDefault(node, "REQUEST_SPOT_INSTANCES", true)!);
     this.instanceTypes = instanceTypeStrings ? instanceTypeStrings.map((instanceType) => new InstanceType(instanceType.trim())) : undefined;
 
     this.usePublicSubnets = getEnvBoolOrDefault(node, "PUBLIC_SUBNETS", true);
