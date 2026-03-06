@@ -46,6 +46,8 @@ workDir = "$NF_WORKDIR"
 process.executor = "awsbatch"
 process.queue = "$NF_JOB_QUEUE"
 aws.batch.cliPath = "$AWS_CLI_PATH"
+env.AWS_RETRY_MODE = "adaptive"
+env.AWS_MAX_ATTEMPTS = "10"
 EOF
 
 if [[ "$EFS_MOUNT" != "" ]]
