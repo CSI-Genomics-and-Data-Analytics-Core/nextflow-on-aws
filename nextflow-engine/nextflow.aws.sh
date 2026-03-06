@@ -41,11 +41,17 @@ NF_CONFIG=./nextflow.config
 echo "Creating config file: $NF_CONFIG"
 
 # To figure out - batch volumes
+# S3 transfer tuning: reduce sporadic ConnectionResetError (104) during downloads
+# - maxParallelTransfers: limit concurrent S3 ops per job to avoid network congestion
+# - maxTransferAttempts: retry transient failures (connection resets)
 cat << EOF > $NF_CONFIG
 workDir = "$NF_WORKDIR"
 process.executor = "awsbatch"
 process.queue = "$NF_JOB_QUEUE"
 aws.batch.cliPath = "$AWS_CLI_PATH"
+aws.batch.maxParallelTransfers = 2
+aws.batch.maxTransferAttempts = 5
+aws.batch.retryMode = "adaptive"
 env.AWS_RETRY_MODE = "adaptive"
 env.AWS_MAX_ATTEMPTS = "10"
 EOF
