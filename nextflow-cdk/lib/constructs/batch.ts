@@ -1,6 +1,7 @@
 import { Fn, Names, Stack, Tags } from "aws-cdk-lib";
-import { CfnComputeEnvironment, CfnJobQueue, FargateComputeEnvironment, IComputeEnvironment, ManagedEc2EcsComputeEnvironment, EcsMachineImage, AllocationStrategy, EcsMachineImageType } from "aws-cdk-lib/aws-batch";
+import { CfnComputeEnvironment, CfnJobQueue, FargateComputeEnvironment, IComputeEnvironment, ManagedEc2EcsComputeEnvironment, EcsMachineImage, AllocationStrategy } from "aws-cdk-lib/aws-batch";
 import { CfnLaunchTemplate, InstanceType, IVpc, Vpc, SubnetSelection, LaunchTemplate, IMachineImage, MachineImage, UserData } from "aws-cdk-lib/aws-ec2";
+import { EcsOptimizedImage } from "aws-cdk-lib/aws-ecs";
 import {
   CfnInstanceProfile,
   Grant,
@@ -196,7 +197,7 @@ export class Batch extends Construct {
   private renderComputeEnvironment(options: ComputeOptions): IComputeEnvironment {
     const computeType = options.computeType || defaultComputeType;
     if (computeType == "FARGATE" || computeType == "FARGATE_SPOT") {
-      return new FargateComputeEnvironment(this, "ComputeEnvironment", {
+      return new FargateComputeEnvironment(this, "ComputeEnvironmentV9", {
         vpc: options.vpc,
         vpcSubnets: options.subnets,
         maxvCpus: options.maxVCpus ?? 256,
@@ -235,7 +236,7 @@ export class Batch extends Construct {
     //   "us-west-2": "ami-0c6ee50d15e7364d4",
     // }) as EcsMachineImage;
 
-    const computeEnvironment = new ManagedEc2EcsComputeEnvironment(this, "ComputeEnvironment", {
+    const computeEnvironment = new ManagedEc2EcsComputeEnvironment(this, "ComputeEnvironmentV9", {
         vpc: options.vpc,
         instanceRole: instanceProfile.role,
         instanceTypes: getInstanceTypesForBatch(options.instanceTypes, computeType, Stack.of(this).region),
@@ -244,6 +245,8 @@ export class Batch extends Construct {
         maxvCpus: options.maxVCpus ?? 256,
         allocationStrategy: computeType == "SPOT" ? AllocationStrategy.SPOT_CAPACITY_OPTIMIZED : AllocationStrategy.BEST_FIT_PROGRESSIVE,
         spot: computeType == "SPOT",
+        // Force Amazon Linux 2 (proven stable with btrfs and EBS autoscale)
+        images: [{ image: EcsOptimizedImage.amazonLinux2() }],
     });
 
     if (options.resourceTags) {
